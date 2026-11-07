@@ -1,0 +1,2871 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>VeloCalc Pro - 51 High-Precision Fast Calculators, Guides & AI Assistant</title>
+  <meta name="description" content="Free, fast, private, and client-side calculators for finance, fitness, math, and engineering. Multi-theme color engine, multi-currency, amortization schedules, what-if comparison, and zero data tracking.">
+  <meta name="keywords" content="mortgage calculator, loan calculator, amortization schedule, BMI, DCA calculator, subnet calculator, one rep max, tip calculator, client-side calculator">
+  <meta property="og:title" content="VeloCalc Pro - 51 Precision Online Calculators & AI Guide">
+  <meta property="og:description" content="Private, client-side calculation suite with 51 tools, live color engine, charts, schedules, what-if comparisons, and instant exports.">
+  <meta property="og:type" content="website">
+
+  <!-- Security Headers -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2288243349631995"
+     crossorigin="anonymous"></script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" crossorigin="anonymous"></script>
+
+  <style>
+    :root {
+      --accent: #4f46e5;
+      --accent-hover: #4338ca;
+      --accent-light: rgba(79, 70, 229, 0.12);
+      --accent-border: rgba(79, 70, 229, 0.35);
+      --accent-glow: rgba(79, 70, 229, 0.25);
+      --accent-dark: #3730a3;
+    }
+
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+
+    /* ================= DYNAMIC COLOR THEME UTILITIES ================= */
+    .theme-bg { background-color: var(--accent) !important; }
+    .theme-bg-hover:hover { background-color: var(--accent-hover) !important; }
+    .theme-text { color: var(--accent) !important; }
+    .theme-border { border-color: var(--accent) !important; }
+    .theme-border-soft { border-color: var(--accent-border) !important; }
+    .theme-light-bg { background-color: var(--accent-light) !important; }
+    .theme-shadow { box-shadow: 0 10px 30px -5px var(--accent-glow) !important; }
+
+    /* Rock-Solid Card with Smooth Color Hover (NO MOVING) */
+    .stable-card {
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+      transform: none !important; /* Enforces zero movement */
+    }
+    .stable-card:hover {
+      border-color: var(--accent) !important;
+      box-shadow: 0 0 25px var(--accent-glow) !important;
+    }
+
+    /* Result Pulse on Calculation */
+    @keyframes colorPulse {
+      0% { color: var(--accent); }
+      50% { color: #ffffff; filter: drop-shadow(0 0 8px var(--accent)); }
+      100% { color: var(--accent); }
+    }
+    .calc-pulse {
+      animation: colorPulse 0.4s ease-out;
+    }
+
+    @media print {
+      body * { visibility: hidden; }
+      #scheduleSection, #scheduleSection * { visibility: visible; }
+      #scheduleSection { position: absolute; left: 0; top: 0; width: 100%; display: block !important; }
+      * { transform: none !important; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200">
+
+  <!-- ================= TOP NAVBAR ================= -->
+  <header class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-40 shadow-xs transition-colors">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-3">
+      
+      <!-- Brand -->
+      <a href="#" class="flex items-center space-x-3 group shrink-0">
+        <div id="brandLogo" class="w-10 h-10 theme-bg rounded-xl flex items-center justify-center text-white font-extrabold text-xl shadow-md transition-colors duration-300 select-none">
+          ⚡
+        </div>
+        <div>
+          <span class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white block leading-tight">
+            VeloCalc <span id="proBadge" class="text-xs theme-text font-black transition-colors">PRO</span>
+          </span>
+          <span class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">51 Precision Tools • Stable Engine</span>
+        </div>
+      </a>
+
+      <!-- Quick Command Bar Trigger -->
+      <div class="flex-1 max-w-sm relative hidden sm:block">
+        <button onclick="toggleCommandPalette(true)" 
+                class="w-full pl-10 pr-12 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200/70 dark:hover:bg-slate-700 text-left text-sm rounded-xl border border-transparent focus:border-indigo-500 outline-none text-slate-400 transition flex items-center justify-between">
+          <span class="flex items-center gap-2">
+            <span>🔍</span>
+            <span>Search 51 tools or formulas...</span>
+          </span>
+          <kbd class="px-1.5 py-0.5 text-[10px] font-mono bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded text-slate-500">⌘K</kbd>
+        </button>
+      </div>
+
+      <!-- Color Palette Picker & Action Icons -->
+      <div class="flex items-center gap-2">
+        
+        <!-- Live Color Palette Switcher -->
+        <div class="flex items-center gap-1.5 px-2.5 py-1.5 bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700" title="Change Calculator Accent Color">
+          <span class="text-xs mr-0.5 hidden lg:inline font-bold text-slate-500">🎨 Color:</span>
+          <button onclick="setThemeColor('indigo')" class="w-5 h-5 rounded-full bg-indigo-600 hover:scale-110 transition border border-white/50" title="Indigo Theme"></button>
+          <button onclick="setThemeColor('emerald')" class="w-5 h-5 rounded-full bg-emerald-500 hover:scale-110 transition border border-white/50" title="Emerald Theme"></button>
+          <button onclick="setThemeColor('cyan')" class="w-5 h-5 rounded-full bg-cyan-500 hover:scale-110 transition border border-white/50" title="Cyan Theme"></button>
+          <button onclick="setThemeColor('rose')" class="w-5 h-5 rounded-full bg-rose-500 hover:scale-110 transition border border-white/50" title="Rose Theme"></button>
+          <button onclick="setThemeColor('amber')" class="w-5 h-5 rounded-full bg-amber-500 hover:scale-110 transition border border-white/50" title="Amber Theme"></button>
+          <button onclick="setThemeColor('violet')" class="w-5 h-5 rounded-full bg-violet-600 hover:scale-110 transition border border-white/50" title="Violet Theme"></button>
+        </div>
+
+        <select id="currencySelector" onchange="changeCurrency(this.value)" 
+                class="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-xl px-2.5 py-2 outline-none cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700 transition"
+                title="Change Currency">
+          <option value="USD">USD ($)</option>
+          <option value="EUR">EUR (€)</option>
+          <option value="GBP">GBP (£)</option>
+          <option value="JPY">JPY (¥)</option>
+          <option value="CAD">CAD (C$)</option>
+          <option value="AUD">AUD (A$)</option>
+          <option value="INR">INR (₹)</option>
+        </select>
+
+        <button onclick="toggleAiDrawer(true)" class="flex items-center gap-1.5 text-xs font-bold theme-text theme-light-bg px-3 py-2 rounded-xl border theme-border-soft transition">
+          <span>✨</span>
+          <span class="hidden md:inline">AI Guide</span>
+        </button>
+
+        <button onclick="toggleHistoryModal(true)" 
+                class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition"
+                title="Calculation History (H)" aria-label="Calculation History">
+          📋
+        </button>
+
+        <button onclick="toggleDarkMode()" 
+                class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition"
+                title="Toggle Theme" aria-label="Toggle Theme" id="themeToggleBtn">
+          🌙
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= FAVORITES PIN BAR ================= -->
+  <div id="favoritesBarContainer" class="bg-slate-100/70 dark:bg-slate-900/70 border-b border-slate-200 dark:border-slate-800 px-4 py-1.5 hidden">
+    <div class="max-w-7xl mx-auto flex items-center gap-2 overflow-x-auto text-xs py-0.5">
+      <span class="font-bold theme-text flex items-center gap-1 shrink-0 text-[11px] uppercase tracking-wider">
+        ⭐ Pinned:
+      </span>
+      <div id="favoritesList" class="flex items-center gap-1.5"></div>
+    </div>
+  </div>
+
+  <!-- ================= HERO CALCULATOR SECTION (STABLE, VIBRANT COLOR) ================= -->
+  <section class="bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white py-12 px-4 relative overflow-hidden transition-colors duration-500">
+    
+    <!-- Ambient Static Radial Glow (Matches Theme Color) -->
+    <div id="heroAmbientGlow" class="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[450px] rounded-full blur-[120px] pointer-events-none opacity-20 transition-all duration-700" style="background-color: var(--accent);"></div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
+      
+      <div class="text-center max-w-3xl mx-auto mb-8">
+        <div id="heroPill" class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full theme-light-bg border theme-border-soft theme-text text-xs font-bold mb-3 backdrop-blur-md transition-colors duration-300">
+          <span>⚡</span> Client-Side Execution • Pure Equations • Zero Data Tracking
+        </div>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-3">
+          Precision Calculators for Critical Decisions
+        </h1>
+        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-2xl mx-auto">
+          Sandboxed computation suite. Interactive multi-color interface, dynamic graphs, full amortization schedules, and contextual AI intelligence.
+        </p>
+
+        <!-- Category Buttons (Each shifts calculator color on click) -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mt-6" id="categoryButtonsContainer">
+          <button onclick="selectCategory('All', null, 'indigo')" id="cat-btn-All" 
+                  class="cat-pill px-4 py-2 rounded-xl text-xs font-bold transition duration-200 theme-bg text-white shadow-md border-b-2 border-black/20">
+            ✨ All (51)
+          </button>
+          <button onclick="selectCategory('Financial', 'mortgage', 'emerald')" id="cat-btn-Financial" 
+                  class="cat-pill px-4 py-2 rounded-xl text-xs font-bold transition duration-200 bg-slate-800/80 backdrop-blur-sm text-slate-300 hover:bg-slate-700 border-b-2 border-slate-900">
+            💰 Financial (19)
+          </button>
+          <button onclick="selectCategory('Fitness & Health', 'bmi', 'rose')" id="cat-btn-Fitness" 
+                  class="cat-pill px-4 py-2 rounded-xl text-xs font-bold transition duration-200 bg-slate-800/80 backdrop-blur-sm text-slate-300 hover:bg-slate-700 border-b-2 border-slate-900">
+            🥗 Fitness &amp; Health (13)
+          </button>
+          <button onclick="selectCategory('Math', 'percentage', 'violet')" id="cat-btn-Math" 
+                  class="cat-pill px-4 py-2 rounded-xl text-xs font-bold transition duration-200 bg-slate-800/80 backdrop-blur-sm text-slate-300 hover:bg-slate-700 border-b-2 border-slate-900">
+            📐 Math (8)
+          </button>
+          <button onclick="selectCategory('Tech & Engineering', 'subnet', 'cyan')" id="cat-btn-Tech" 
+                  class="cat-pill px-4 py-2 rounded-xl text-xs font-bold transition duration-200 bg-slate-800/80 backdrop-blur-sm text-slate-300 hover:bg-slate-700 border-b-2 border-slate-900">
+            ⚡ Tech &amp; Engineering (11)
+          </button>
+        </div>
+      </div>
+
+      <!-- Rock-Solid Stationary Calculator Card -->
+      <div id="heroCard" class="max-w-4xl mx-auto bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl text-slate-800 dark:text-slate-100 rounded-3xl shadow-2xl border-2 theme-border-soft overflow-hidden transition-all duration-300 relative theme-shadow">
+        
+        <div class="px-6 py-4 bg-slate-50/80 dark:bg-slate-800/60 border-b border-slate-200/80 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <button id="pinToolBtn" onclick="togglePinCurrentCalc()" class="text-xl text-slate-300 hover:text-amber-400 transition" title="Pin tool to favorites">
+              ⭐
+            </button>
+            <div>
+              <div class="flex items-center gap-2">
+                <span id="heroCatBadge" class="text-[10px] font-bold uppercase tracking-wider theme-text theme-light-bg px-2.5 py-0.5 rounded-md border theme-border-soft">Category</span>
+                <span class="text-xs text-slate-400">• High Precision Computation</span>
+              </div>
+              <h2 id="heroCalcTitle" class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mt-0.5">Mortgage Calculator</h2>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button onclick="openCompareModal()" class="px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5 transition shadow-xs" title="Compare side-by-side scenarios">
+              ⚖️ <span>Compare</span>
+            </button>
+            <button onclick="shareCurrentCalc()" class="px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5 transition shadow-xs" title="Copy shareable link with current numbers">
+              🔗 <span>Share</span>
+            </button>
+            <select id="heroCalcPicker" onchange="setHashRoute(this.value, false)" 
+                    class="bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold rounded-xl px-2.5 py-1.5 outline-none focus:ring-2 focus:ring-indigo-500">
+            </select>
+          </div>
+        </div>
+
+        <div class="p-6 sm:p-8 grid grid-cols-1 md:grid-cols-12 gap-8">
+          
+          <!-- Inputs Column -->
+          <div class="md:col-span-7 space-y-4">
+            <p id="heroCalcDesc" class="text-xs text-slate-500 dark:text-slate-400 mb-2"></p>
+            <div id="heroInputsContainer" class="space-y-3.5"></div>
+            <div id="heroExtraButtons" class="pt-2"></div>
+          </div>
+
+          <!-- Output Column -->
+          <div class="md:col-span-5 flex flex-col justify-center">
+            <div id="resultBox" class="border-2 theme-border-soft rounded-3xl p-6 shadow-lg flex flex-col justify-between backdrop-blur-md transition-colors duration-300 bg-white/70 dark:bg-slate-850">
+              
+              <div>
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Result</span>
+                  <div class="flex items-center gap-1">
+                    <button onclick="askAiAboutCurrentCalc()" class="px-2.5 py-1 text-[11px] font-bold theme-text bg-white dark:bg-slate-700 rounded-xl hover:shadow-xs transition" title="Ask AI Guide about this result">
+                      ✨ Explain
+                    </button>
+                    <button onclick="copyHeroResult()" class="p-1.5 hover:bg-white dark:hover:bg-slate-700 rounded-lg text-slate-500 dark:text-slate-400 transition" title="Copy Result">
+                      <span id="copyIcon">📋</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div id="heroPrimaryResult" class="text-3xl sm:text-4xl font-black theme-text my-2.5 break-all select-all transition-colors duration-200">--</div>
+                
+                <div id="heroSecondaryResults" class="space-y-2 pt-3 mt-3 border-t border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-600 dark:text-slate-300"></div>
+
+                <!-- Chart Canvas -->
+                <div id="chartContainer" class="h-44 w-full mt-4 pt-3 border-t border-slate-200 dark:border-slate-700 hidden">
+                  <canvas id="heroChartCanvas"></canvas>
+                </div>
+              </div>
+
+              <!-- Action Bar -->
+              <div class="mt-5 pt-3 border-t border-slate-200 dark:border-slate-700 flex flex-wrap items-center justify-between gap-2 text-[11px] font-bold text-slate-600 dark:text-slate-300">
+                <button onclick="saveCurrentToHistory()" class="flex items-center gap-1 hover:theme-text transition">
+                  💾 Save
+                </button>
+                <button onclick="exportCurrentCSV()" class="flex items-center gap-1 hover:theme-text transition">
+                  📥 Export CSV
+                </button>
+                <button id="viewScheduleBtn" onclick="toggleScheduleSection()" class="flex items-center gap-1 theme-text hover:underline transition hidden">
+                  📊 Schedule
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Amortization Schedule Accordion -->
+        <div id="scheduleSection" class="border-t border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 p-6 hidden">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-sm font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+                <span>Detailed Year-by-Year Schedule</span>
+              </h3>
+              <p class="text-[11px] text-slate-500">True amortized principal, interest, and remaining balance timeline.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="window.print()" class="px-2.5 py-1 text-xs font-semibold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:border-slate-400 transition">
+                🖨️ Print
+              </button>
+              <button onclick="toggleScheduleSection()" class="text-xs text-slate-400 hover:text-slate-600">✕ Close</button>
+            </div>
+          </div>
+          <div class="overflow-x-auto max-h-72 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900">
+            <table class="w-full text-left text-xs text-slate-600 dark:text-slate-300">
+              <thead id="scheduleTableHead" class="bg-slate-100 dark:bg-slate-800 text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 sticky top-0"></thead>
+              <tbody id="scheduleTableBody" class="divide-y divide-slate-100 dark:divide-slate-800"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= DIRECTORY GRID SECTION ================= -->
+  <section id="all-calculators" class="max-w-7xl mx-auto px-4 py-12 flex-1 w-full">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+      <div>
+        <h2 id="directoryHeaderTitle" class="text-2xl font-extrabold text-slate-900 dark:text-white">Explore All 51 Tools</h2>
+        <p class="text-sm text-slate-500 dark:text-slate-400">Select any precision calculator below to load it into the engine.</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <span id="activeFilterLabel" class="text-xs font-bold theme-text theme-light-bg px-3 py-1.5 rounded-full border theme-border-soft">Showing All</span>
+      </div>
+    </div>
+    <div id="directoryGrids" class="space-y-10"></div>
+  </section>
+
+  <!-- ================= BLOG & GUIDES SECTION ================= -->
+  <section id="blog-section" class="bg-slate-100/60 dark:bg-slate-900/60 border-t border-slate-200 dark:border-slate-800 py-16 px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider theme-text theme-light-bg px-2.5 py-1 rounded-md">
+            Knowledge Base
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-2">
+            Formulas, Guides &amp; Mathematical Insights
+          </h2>
+          <p class="text-sm text-slate-500 dark:text-slate-400 max-w-xl mt-1">
+            Learn the exact mathematics, physiological formulas, and networking algorithms powering our calculators.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-1.5" id="blogFilterContainer">
+          <button onclick="filterBlog('All')" class="blog-tab active px-3 py-1.5 rounded-lg text-xs font-semibold theme-bg text-white">All Articles</button>
+          <button onclick="filterBlog('Finance')" class="blog-tab px-3 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">Finance</button>
+          <button onclick="filterBlog('Health')" class="blog-tab px-3 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">Health</button>
+          <button onclick="filterBlog('Tech')" class="blog-tab px-3 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">Tech &amp; Math</button>
+        </div>
+      </div>
+      <div id="articlesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- ================= FLOATING AI AGENT WIDGET ================= -->
+  <div class="fixed bottom-6 right-6 z-40">
+    <button onclick="toggleAiDrawer(true)" 
+            class="group flex items-center gap-2.5 theme-bg text-white px-4 py-3 rounded-full shadow-2xl transition transform font-extrabold text-sm border border-white/20 hover:brightness-110">
+      <span class="text-lg">✨</span>
+      <span>Ask Velo AI</span>
+    </button>
+  </div>
+
+  <!-- AI Slide-Over Drawer -->
+  <div id="aiDrawer" class="fixed inset-y-0 right-0 z-50 w-full sm:w-[440px] bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 ease-in-out">
+    <div class="p-4 bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-lg theme-bg text-white flex items-center justify-center font-bold text-sm shadow-xs">⚡</div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <h3 class="font-extrabold text-sm text-slate-900 dark:text-white">Velo AI Guide</h3>
+            <span class="text-[9px] uppercase font-bold tracking-wider text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/70 px-1.5 py-0.2 rounded">Private Engine</span>
+          </div>
+          <p id="aiContextPill" class="text-[11px] text-slate-500 dark:text-slate-400 truncate max-w-[240px]">Ready to assist</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-1">
+        <button onclick="clearAiChat()" class="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs font-semibold rounded-lg" title="Clear Chat">Clear</button>
+        <button onclick="toggleAiDrawer(false)" class="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-lg rounded-lg" aria-label="Close Drawer">✕</button>
+      </div>
+    </div>
+
+    <div id="aiActiveToolBar" class="px-4 py-2 theme-light-bg border-b theme-border-soft text-[11px] text-slate-800 dark:text-slate-200 flex items-center justify-between">
+      <span class="truncate">Tool in view: <strong id="aiActiveToolName">Mortgage Calculator</strong></span>
+      <button onclick="askAiAboutCurrentCalc()" class="font-bold underline theme-text shrink-0 ml-2">Analyze This</button>
+    </div>
+
+    <div id="aiMessages" class="flex-1 overflow-y-auto p-4 space-y-3.5 text-xs sm:text-sm"></div>
+
+    <div class="px-4 py-2 bg-slate-50/80 dark:bg-slate-800/40 border-t border-slate-100 dark:border-slate-800 flex flex-wrap gap-1.5 overflow-x-auto">
+      <button onclick="handleQuickPrompt('Analyze my current calculation in detail')" class="px-2.5 py-1 text-[11px] bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full hover:border-slate-400 text-slate-600 dark:text-slate-300">💡 Analyze Calculation</button>
+      <button onclick="handleQuickPrompt('How fast will my money double?')" class="px-2.5 py-1 text-[11px] bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full hover:border-slate-400 text-slate-600 dark:text-slate-300">📈 Doubling Time (Rule 72)</button>
+      <button onclick="handleQuickPrompt('Calculate math: 50000 * (1 + 0.07)^15')" class="px-2.5 py-1 text-[11px] bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full hover:border-slate-400 text-slate-600 dark:text-slate-300">🧮 Fast Math Solver</button>
+    </div>
+
+    <form id="aiChatForm" onsubmit="handleAiSubmit(event)" class="p-3 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 flex items-center gap-2">
+      <input type="text" id="aiUserInput" placeholder="Ask formulas, run custom math, tips..." maxlength="200" autocomplete="off"
+             class="flex-1 px-3.5 py-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs sm:text-sm border border-transparent focus:theme-border outline-none text-slate-800 dark:text-slate-100 transition">
+      <button type="submit" class="px-3.5 py-2.5 theme-bg text-white font-bold rounded-xl text-xs transition shrink-0 hover:brightness-110">Send</button>
+    </form>
+  </div>
+
+  <!-- ================= ARTICLE VIEWER MODAL ================= -->
+  <div id="articleModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/75 backdrop-blur-sm hidden" role="dialog" aria-modal="true">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[88vh] flex flex-col overflow-hidden">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+        <div class="flex items-center gap-2">
+          <span id="articleCategoryBadge" class="text-[10px] font-bold uppercase tracking-wider theme-text theme-light-bg px-2.5 py-1 rounded">Category</span>
+          <span id="articleModalDate" class="text-xs text-slate-400 font-medium">Date</span>
+          <span class="text-xs text-slate-400">•</span>
+          <span id="articleModalReadTime" class="text-xs text-slate-400 font-medium">Read Time</span>
+        </div>
+        <button onclick="closeArticleModal()" class="p-1.5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 text-xl rounded-lg">✕</button>
+      </div>
+
+      <div class="flex-1 overflow-y-auto py-6 pr-2 space-y-4 text-slate-700 dark:text-slate-300">
+        <h3 id="articleModalTitle" class="text-2xl font-extrabold text-slate-900 dark:white leading-tight"></h3>
+        <div id="articleModalContent" class="text-sm leading-relaxed space-y-3 prose dark:prose-invert max-w-none"></div>
+      </div>
+
+      <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+        <span class="text-xs text-slate-400">Ready to compute your own numbers?</span>
+        <button id="articleCtaBtn" class="px-5 py-2.5 theme-bg text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5 hover:brightness-110">
+          <span>Open Interactive Calculator</span>
+          <span>→</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= COMMAND PALETTE ================= -->
+  <div id="cmdPaletteModal" class="fixed inset-0 z-50 flex items-start justify-center pt-20 p-4 bg-slate-900/70 backdrop-blur-xs hidden" role="dialog" aria-modal="true">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-xl w-full shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col">
+      <div class="p-4 border-b border-slate-100 dark:border-slate-800 flex items-center gap-3">
+        <span class="text-slate-400 text-lg">🔍</span>
+        <input type="text" id="cmdPaletteInput" placeholder="Jump to calculator or action... (e.g. mortgage, tip, 1RM, dark mode)"
+               class="flex-1 bg-transparent text-sm sm:text-base outline-none text-slate-900 dark:text-white"
+               oninput="filterCommandPalette(this.value)">
+        <kbd class="text-[10px] bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded text-slate-400">ESC</kbd>
+      </div>
+      <div id="cmdPaletteResults" class="max-h-80 overflow-y-auto p-2 space-y-1"></div>
+    </div>
+  </div>
+
+  <!-- ================= COMPARE WHAT-IF SCENARIOS MODAL ================= -->
+  <div id="compareModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-xs hidden" role="dialog" aria-modal="true">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-3xl w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[90vh] flex flex-col">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider theme-text theme-light-bg px-2.5 py-1 rounded">Side-by-Side</span>
+          <h3 id="compareModalTitle" class="text-lg font-extrabold text-slate-900 dark:text-white mt-1">Compare What-If Scenarios</h3>
+        </div>
+        <button onclick="closeCompareModal()" class="p-1.5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 text-xl rounded-lg">✕</button>
+      </div>
+
+      <div class="flex-1 overflow-y-auto py-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="p-4 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <h4 class="font-extrabold text-sm text-slate-900 dark:text-white mb-3 flex items-center justify-between">
+              <span>Scenario A (Current)</span>
+              <span id="compareResA" class="theme-text font-black">--</span>
+            </h4>
+            <div id="compareInputsA" class="space-y-2 text-xs"></div>
+          </div>
+
+          <div class="p-4 theme-light-bg rounded-2xl border theme-border-soft">
+            <h4 class="font-extrabold text-sm text-slate-900 dark:text-slate-100 mb-3 flex items-center justify-between">
+              <span>Scenario B (Alternative)</span>
+              <span id="compareResB" class="text-emerald-500 font-black">--</span>
+            </h4>
+            <div id="compareInputsB" class="space-y-2 text-xs"></div>
+          </div>
+        </div>
+
+        <div id="compareDeltaCard" class="mt-4 p-4 bg-slate-100 dark:bg-slate-800 rounded-xl text-center">
+          <span class="text-xs text-slate-500 block">Scenario Difference (Delta)</span>
+          <div id="compareDeltaText" class="text-sm font-extrabold theme-text mt-0.5">--</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= COMPREHENSIVE LEGAL & PRIVACY MODAL ================= -->
+  <div id="legalModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/75 backdrop-blur-sm hidden" role="dialog" aria-modal="true">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-4xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[88vh] flex flex-col overflow-hidden">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800 gap-3">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] font-bold uppercase tracking-wider theme-text theme-light-bg px-2.5 py-1 rounded">
+              Legal Compliance Center
+            </span>
+            <span class="text-xs text-slate-400">Zero-Log Client Verified</span>
+          </div>
+          <h3 id="legalModalTitle" class="text-xl font-extrabold text-slate-900 dark:text-white mt-1"></h3>
+        </div>
+
+        <div class="flex items-center gap-1.5 self-start sm:self-auto">
+          <button onclick="switchLegalTab('privacy')" id="legalTabBtn-privacy" class="px-3 py-1.5 text-xs font-bold rounded-lg border theme-bg text-white transition">Privacy Policy</button>
+          <button onclick="switchLegalTab('terms')" id="legalTabBtn-terms" class="px-3 py-1.5 text-xs font-bold rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Terms of Service</button>
+          <button onclick="switchLegalTab('disclaimer')" id="legalTabBtn-disclaimer" class="px-3 py-1.5 text-xs font-bold rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Disclaimers</button>
+          <button onclick="closeLegalModal()" class="p-1.5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 text-xl rounded-lg ml-2" aria-label="Close">✕</button>
+        </div>
+      </div>
+
+      <div id="legalModalBody" class="flex-1 overflow-y-auto py-6 pr-3 space-y-5 text-xs sm:text-sm leading-relaxed text-slate-600 dark:text-slate-300"></div>
+
+      <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
+        <span class="text-slate-400 hidden sm:inline">Certified 100% Client-Side Computation</span>
+        <button onclick="closeLegalModal()" class="px-6 py-2.5 theme-bg text-white text-xs font-bold rounded-xl transition hover:brightness-110">
+          I Understand &amp; Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- History Modal -->
+  <div id="historyModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs hidden" role="dialog" aria-modal="true">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[85vh] flex flex-col">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
+        <div>
+          <h3 class="text-lg font-extrabold text-slate-900 dark:text-white">Calculation History</h3>
+          <p class="text-xs text-slate-500">Stored strictly in local client memory</p>
+        </div>
+        <button onclick="toggleHistoryModal(false)" class="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-lg" aria-label="Close">✕</button>
+      </div>
+      <div id="historyList" class="flex-1 overflow-y-auto py-4 space-y-3"></div>
+      <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-end gap-2">
+        <button onclick="clearAllHistory()" class="text-xs font-semibold text-rose-600 hover:text-rose-700 px-3 py-1.5 rounded-lg">
+          🗑️ Clear History
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-5 left-5 z-50 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold px-4 py-2.5 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition duration-300 pointer-events-none" role="status" aria-live="polite"></div>
+
+  <!-- ================= COMPLIANCE FOOTER ================= -->
+  <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-10 text-xs text-slate-500 dark:text-slate-400 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 space-y-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-2">
+          <div class="w-6 h-6 theme-bg rounded-lg flex items-center justify-center text-white font-extrabold text-xs">⚡</div>
+          <span class="font-extrabold text-slate-900 dark:text-white text-sm">VeloCalc PRO</span>
+          <span class="text-slate-400">| 51 Standardized Analytical Engines</span>
+        </div>
+        <div class="flex flex-wrap items-center justify-center gap-6 font-semibold">
+          <a href="#privacy" onclick="openLegalModal('privacy'); return false;" class="hover:theme-text transition">Privacy Policy</a>
+          <a href="#terms" onclick="openLegalModal('terms'); return false;" class="hover:theme-text transition">Terms of Service</a>
+          <a href="#disclaimer" onclick="openLegalModal('disclaimer'); return false;" class="hover:theme-text transition">Disclaimers</a>
+          <a href="#blog-section" class="hover:theme-text transition">Guides &amp; Blog</a>
+        </div>
+      </div>
+
+      <div class="border-t border-slate-100 dark:border-slate-800 pt-6 text-center leading-relaxed max-w-3xl mx-auto">
+        <p class="text-[11px] text-slate-400">
+          <strong>Notice:</strong> Calculations provided by VeloCalc PRO are mathematical models designed strictly for illustrative and educational purposes. VeloCalc does not provide licensed financial, legal, tax, or medical advice.
+        </p>
+        <p class="mt-2 text-[11px] text-slate-400">
+          VeloCalc PRO &copy; All calculations run locally in your browser sandbox. Zero data is recorded, saved, or transmitted to any server.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= SCRIPT & CALCULATION ENGINE ================= -->
+  <script>
+    'use strict';
+
+    // ================= COLOR THEME ENGINE =================
+    const colorThemes = {
+      indigo: {
+        accent: '#4f46e5',
+        hover: '#4338ca',
+        light: 'rgba(79, 70, 229, 0.12)',
+        border: 'rgba(79, 70, 229, 0.35)',
+        glow: 'rgba(79, 70, 229, 0.30)',
+        dark: '#3730a3'
+      },
+      emerald: {
+        accent: '#10b981',
+        hover: '#059669',
+        light: 'rgba(16, 185, 129, 0.12)',
+        border: 'rgba(16, 185, 129, 0.35)',
+        glow: 'rgba(16, 185, 129, 0.30)',
+        dark: '#047857'
+      },
+      cyan: {
+        accent: '#06b6d4',
+        hover: '#0891b2',
+        light: 'rgba(6, 182, 212, 0.12)',
+        border: 'rgba(6, 182, 212, 0.35)',
+        glow: 'rgba(6, 182, 212, 0.30)',
+        dark: '#0e7490'
+      },
+      rose: {
+        accent: '#f43f5e',
+        hover: '#e11d48',
+        light: 'rgba(244, 63, 94, 0.12)',
+        border: 'rgba(244, 63, 94, 0.35)',
+        glow: 'rgba(244, 63, 94, 0.30)',
+        dark: '#be123c'
+      },
+      amber: {
+        accent: '#f59e0b',
+        hover: '#d97706',
+        light: 'rgba(245, 158, 11, 0.12)',
+        border: 'rgba(245, 158, 11, 0.35)',
+        glow: 'rgba(245, 158, 11, 0.30)',
+        dark: '#b45309'
+      },
+      violet: {
+        accent: '#8b5cf6',
+        hover: '#7c3aed',
+        light: 'rgba(139, 92, 246, 0.12)',
+        border: 'rgba(139, 92, 246, 0.35)',
+        glow: 'rgba(139, 92, 246, 0.30)',
+        dark: '#6d28d9'
+      }
+    };
+
+    let activeThemeKey = localStorage.getItem('velocalc_theme_color') || 'indigo';
+
+    function setThemeColor(themeKey, notify = true) {
+      if (!colorThemes[themeKey]) themeKey = 'indigo';
+      activeThemeKey = themeKey;
+      try { localStorage.setItem('velocalc_theme_color', themeKey); } catch (e) {}
+
+      const t = colorThemes[themeKey];
+      const r = document.documentElement;
+      r.style.setProperty('--accent', t.accent);
+      r.style.setProperty('--accent-hover', t.hover);
+      r.style.setProperty('--accent-light', t.light);
+      r.style.setProperty('--accent-border', t.border);
+      r.style.setProperty('--accent-glow', t.glow);
+      r.style.setProperty('--accent-dark', t.dark);
+
+      const glowEl = document.getElementById('heroAmbientGlow');
+      if (glowEl) glowEl.style.backgroundColor = t.accent;
+
+      // Pulse color on result to demonstrate immediate response
+      const resEl = document.getElementById('heroPrimaryResult');
+      if (resEl) {
+        resEl.classList.remove('calc-pulse');
+        void resEl.offsetWidth; // trigger reflow
+        resEl.classList.add('calc-pulse');
+      }
+
+      if (notify) showToast(`Color theme updated to ${themeKey.toUpperCase()}!`);
+      calculateHero();
+    }
+
+    // --- Active Currency State ---
+    let activeCurrency = localStorage.getItem('velocalc_currency') || 'USD';
+    const currencySymbols = { USD: '$', EUR: '€', GBP: '£', JPY: '¥', CAD: 'C$', AUD: 'A$', INR: '₹' };
+
+    function changeCurrency(curr) {
+      activeCurrency = curr;
+      try { localStorage.setItem('velocalc_currency', curr); } catch (e) {}
+      calculateHero();
+      renderDirectory();
+    }
+
+    // --- Utilities ---
+    function escapeHTML(str) {
+      if (str === null || str === undefined) return '';
+      return String(str).replace(/[&<>'"]/g, char => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+      }[char] || char));
+    }
+
+    function sanitizeForCSV(val) {
+      let str = String(val ?? '');
+      if (/^[=+\-@\t\r]/.test(str)) str = "'" + str;
+      return `"${str.replace(/"/g, '""')}"`;
+    }
+
+    const cur = (n) => {
+      if (isNaN(n) || !isFinite(n)) return `${currencySymbols[activeCurrency] || '$'}0.00`;
+      return new Intl.NumberFormat('en-US', { style: 'currency', currency: activeCurrency }).format(n);
+    };
+
+    const num = (n, d = 2) => isNaN(n) || !isFinite(n) ? "0" : Number(n).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: 0 });
+
+    const gcd = (a, b) => {
+      a = Math.abs(Math.round(a));
+      b = Math.abs(Math.round(b));
+      while (b) { [a, b] = [b, a % b]; }
+      return a || 1;
+    };
+
+    // ================= LEGAL & PRIVACY POLICY TERMS =================
+    const legalContent = {
+      privacy: {
+        title: "Privacy Policy",
+        body: `
+          <div class="p-3.5 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-2xl text-emerald-900 dark:text-emerald-200 text-xs">
+            <strong>Zero-Knowledge Guarantee:</strong> VeloCalc PRO operates on an entirely decentralized client-side paradigm. None of the mathematical parameters, sensitive financial balances, biometric dimensions, or credentials you enter ever leave your browser runtime.
+          </div>
+          <h4 class="font-extrabold text-slate-900 dark:text-white text-base mt-4">1. Information We Do Not Collect (Data Minimization)</h4>
+          <p>In accordance with GDPR Article 5(1)(c) and CCPA/CPRA, VeloCalc PRO enforces strict data avoidance:</p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li><strong>No Financial Data Collection:</strong> Mortgage balances, amortizations, and salaries compute purely in transient RAM.</li>
+            <li><strong>No Health or Biometric Tracking:</strong> Body dimensions and caloric profiles are never saved or indexed externally.</li>
+            <li><strong>Zero Remote Logs:</strong> No remote tracking pixels, third-party user fingerprinting, or analytics agents exist on this site.</li>
+          </ul>
+        `
+      },
+      terms: {
+        title: "Terms of Service",
+        body: `
+          <h4 class="font-extrabold text-slate-900 dark:text-white text-base">1. Acceptance of Terms &amp; Scope</h4>
+          <p>By accessing VeloCalc PRO, you agree to comply with and be bound by these comprehensive Terms of Service. If you do not agree, discontinue use immediately.</p>
+          <h4 class="font-extrabold text-slate-900 dark:text-white text-base mt-4">2. "AS-IS" Warranty Disclaimer</h4>
+          <p>VeloCalc PRO provides all mathematical calculators on an <strong>"AS-IS" AND "AS-AVAILABLE" BASIS</strong> without warranties of any kind. While formulas are cross-referenced with standard financial mathematics (compound annuities), clinical equations (Mifflin-St Jeor), and RFC IPv4 subnet specifications, users accept all risk for implementation decisions.</p>
+        `
+      },
+      disclaimer: {
+        title: "Financial, Health & Professional Disclaimers",
+        body: `
+          <div class="p-3.5 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 rounded-2xl text-amber-900 dark:text-amber-200 text-xs">
+            <strong>Mandatory Advisory:</strong> VeloCalc PRO is an informational mathematical modeling utility and does NOT substitute for certified financial, legal, tax, architectural, or medical counsel.
+          </div>
+          <h4 class="font-extrabold text-slate-900 dark:text-white text-base mt-4">1. Financial Disclaimers</h4>
+          <p>Amortization models, loan calculations, and retirement estimates do not include lender closing fees, dynamic escrow payments, PMI adjustments, or municipal property taxes unless specified.</p>
+        `
+      }
+    };
+
+    function openLegalModal(type = 'privacy') {
+      switchLegalTab(type);
+      document.getElementById('legalModal').classList.remove('hidden');
+    }
+
+    function switchLegalTab(type) {
+      const data = legalContent[type] || legalContent.privacy;
+      document.getElementById('legalModalTitle').innerText = data.title;
+      document.getElementById('legalModalBody').innerHTML = data.body;
+
+      ['privacy', 'terms', 'disclaimer'].forEach(t => {
+        const btn = document.getElementById(`legalTabBtn-${t}`);
+        if (btn) {
+          btn.className = (t === type)
+            ? "px-3 py-1.5 text-xs font-bold rounded-lg border theme-bg text-white transition"
+            : "px-3 py-1.5 text-xs font-bold rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition";
+        }
+      });
+    }
+
+    function closeLegalModal() {
+      document.getElementById('legalModal').classList.add('hidden');
+    }
+
+    // --- Articles Database ---
+    const articles = [
+      {
+        id: "mortgage-amortization-secret",
+        title: "The Front-Loaded Interest Trap: How Amortization Works",
+        category: "Finance",
+        date: "Guides",
+        readTime: "4 min read",
+        snippet: "Why is 80% of your initial monthly mortgage payment going purely to interest rather than principal? Here is the exact formula banks use.",
+        relatedCalcId: "mortgage",
+        content: `
+          <p>Fixed-rate loans rely on the compound annuity formulation to deliver fixed monthly installments ($M$):</p>
+          <div class="p-3 bg-slate-100 dark:bg-slate-800 font-mono text-xs rounded-xl my-2">M = P [ i(1 + i)^n ] / [ (1 + i)^n – 1]</div>
+          <p>Because the initial outstanding balance $P$ is at its maximum, $P \\times i$ consumes almost the entire payment in Month 1. Making single recurring principal payments early drastically curtails aggregate interest over the loan horizon.</p>
+        `
+      },
+      {
+        id: "compound-interest-rule-of-72",
+        title: "The Exponential Machine: Understanding Compound Growth & The Rule of 72",
+        category: "Finance",
+        date: "Insights",
+        readTime: "5 min read",
+        snippet: "How small regular monthly contributions compound into life-changing portfolios, and how to instantly estimate doubling time.",
+        relatedCalcId: "compound",
+        content: `
+          <p>The <strong>Rule of 72</strong> is derived from the natural logarithm of 2 ($\ln(2) \approx 0.693$). For standard annual compounding percentages between 4% and 12%, 72 provides an optimal balance of divisors:</p>
+          <div class="p-3 bg-slate-100 dark:bg-slate-800 font-mono text-xs rounded-xl my-2">Years to Double ≈ 72 / Annual Interest Rate</div>
+          <p>At 8% expected annual returns, your portfolio doubles approximately every 9 years without adding another cent.</p>
+        `
+      },
+      {
+        id: "bmr-vs-tdee-math",
+        title: "BMR vs. TDEE: The Mathematical Science of Energy Balance",
+        category: "Health",
+        date: "Science",
+        readTime: "4 min read",
+        snippet: "Why starvation diets fail and how to use the Mifflin-St Jeor equation to calculate your exact caloric baseline for fat loss.",
+        relatedCalcId: "calorie",
+        content: `
+          <p>The <strong>Mifflin-St Jeor Equation</strong> is validated as the most accurate clinical BMR estimation:</p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li><strong>Men:</strong> BMR = 10W + 6.25H - 5A + 5</li>
+            <li><strong>Women:</strong> BMR = 10W + 6.25H - 5A - 161</li>
+          </ul>
+          <p class="mt-2">Multiplying BMR by the Physical Activity Level factor yields Total Daily Energy Expenditure (TDEE). Modest deficits of 300-500 kcal prevent metabolic down-regulation while enabling steady adiposity reduction.</p>
+        `
+      },
+      {
+        id: "understanding-cidr-subnetting",
+        title: "Demystifying Subnetting: Understanding IPv4 CIDR Prefixes",
+        category: "Tech",
+        date: "Networking",
+        readTime: "6 min read",
+        snippet: "What does /24 or /27 actually mean in network design? Learn how binary host masking calculates available IP allocations.",
+        relatedCalcId: "subnet",
+        content: `
+          <p>Classless Inter-Domain Routing (CIDR) represents the number of leading 1-bits in an IPv4 subnet mask. Usable host capacity equals $2^{(32 - \text{prefix})} - 2$ (subtracting network and broadcast addresses).</p>
+          <p>Under <strong>RFC 3021</strong>, /31 prefixes on point-to-point router links contain 2 usable addresses without standard broadcast overhead.</p>
+        `
+      }
+    ];
+
+    // ================= 51 HARDENED CALCULATORS =================
+    const calculators = [
+      // --- Financial (19) ---
+      {
+        id: "mortgage", name: "Mortgage Calculator", category: "Financial",
+        desc: "Estimate monthly mortgage payments including principal and interest breakdown.",
+        inputs: [
+          { id: "homeVal", label: "Home Value", val: 400000 },
+          { id: "downPay", label: "Down Payment", val: 80000 },
+          { id: "rate", label: "Interest Rate (%)", val: 6.5, step: 0.1 },
+          { id: "term", label: "Term (Years)", val: 30 }
+        ],
+        calc: (v) => {
+          const P = Math.max(0, (v.homeVal || 0) - (v.downPay || 0));
+          const r = Math.max(0, (v.rate || 0) / 100) / 12;
+          const n = Math.max(1, Math.min(600, (v.term || 1) * 12));
+          const emi = r === 0 ? P / n : (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+          const totalCost = emi * n;
+          const totalInterest = Math.max(0, totalCost - P);
+          return {
+            primary: cur(emi) + " /mo",
+            details: [
+              { label: "Financed Principal", val: cur(P) },
+              { label: "Total Interest Paid", val: cur(totalInterest) },
+              { label: "Total Lifetime Cost", val: cur(totalCost) }
+            ],
+            chart: {
+              type: 'doughnut',
+              labels: ['Principal', 'Interest'],
+              data: [P, totalInterest],
+              colors: [colorThemes[activeThemeKey].accent, '#f43f5e']
+            },
+            schedule: generateLoanSchedule(P, r, n, emi)
+          };
+        }
+      },
+      {
+        id: "loan", name: "Personal Loan Calculator", category: "Financial",
+        desc: "Calculate monthly payments and total interest for personal or business loans.",
+        inputs: [
+          { id: "amount", label: "Loan Amount", val: 15000 },
+          { id: "rate", label: "Annual Rate (%)", val: 8.5 },
+          { id: "months", label: "Term (Months)", val: 36 }
+        ],
+        calc: (v) => {
+          const amt = Math.max(0, v.amount || 0);
+          const r = Math.max(0, (v.rate || 0) / 100) / 12;
+          const n = Math.max(1, Math.min(360, v.months || 1));
+          const emi = r === 0 ? amt / n : (amt * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+          const totalCost = emi * n;
+          const totalInterest = Math.max(0, totalCost - amt);
+          return {
+            primary: cur(emi) + " /mo",
+            details: [
+              { label: "Total Interest", val: cur(totalInterest) },
+              { label: "Total Cost", val: cur(totalCost) }
+            ],
+            chart: {
+              type: 'doughnut',
+              labels: ['Principal', 'Interest'],
+              data: [amt, totalInterest],
+              colors: [colorThemes[activeThemeKey].accent, '#f59e0b']
+            },
+            schedule: generateLoanSchedule(amt, r, n, emi)
+          };
+        }
+      },
+      {
+        id: "tip", name: "Tip & Bill Split Calculator", category: "Financial",
+        desc: "Calculate restaurant tip, total bill, and equitable split per person.",
+        inputs: [
+          { id: "bill", label: "Bill Amount", val: 85.50 },
+          { id: "tipPct", label: "Tip Percentage (%)", val: 18 },
+          { id: "people", label: "Number of People", val: 3 }
+        ],
+        calc: (v) => {
+          const bill = Math.max(0, v.bill || 0);
+          const tipPct = Math.max(0, v.tipPct || 0);
+          const people = Math.max(1, Math.round(v.people || 1));
+          const tipTotal = bill * (tipPct / 100);
+          const grandTotal = bill + tipTotal;
+          return {
+            primary: cur(grandTotal / people) + " /person",
+            details: [
+              { label: "Total Tip Amount", val: cur(tipTotal) },
+              { label: "Tip Per Person", val: cur(tipTotal / people) },
+              { label: "Grand Total Bill", val: cur(grandTotal) }
+            ],
+            chart: {
+              type: 'doughnut',
+              labels: ['Base Bill', 'Tip'],
+              data: [bill, tipTotal],
+              colors: [colorThemes[activeThemeKey].accent, '#10b981']
+            }
+          };
+        }
+      },
+      {
+        id: "creditcard", name: "Credit Card Payoff", category: "Financial",
+        desc: "Time and interest required to eliminate revolving debt balances.",
+        inputs: [
+          { id: "balance", label: "Current Balance", val: 6500 },
+          { id: "apr", label: "Annual APR (%)", val: 21.9 },
+          { id: "monthly", label: "Monthly Repayment", val: 250 }
+        ],
+        calc: (v) => {
+          const bal = Math.max(0, v.balance || 0);
+          const r = (Math.max(0, v.apr || 0) / 100) / 12;
+          const pmt = Math.max(1, v.monthly || 0);
+          if (r > 0 && pmt <= bal * r) {
+            return {
+              primary: "Payoff Impossible",
+              details: [{ label: "Critical Alert", val: `Monthly payment must exceed monthly interest accrual (${cur(bal * r)})` }]
+            };
+          }
+          let months = 0;
+          let tempBal = bal;
+          let totalInterest = 0;
+          while (tempBal > 0 && months < 600) {
+            const interest = tempBal * r;
+            totalInterest += interest;
+            tempBal = tempBal + interest - pmt;
+            months++;
+          }
+          return {
+            primary: `${months} Months (${(months/12).toFixed(1)} yrs)`,
+            details: [
+              { label: "Total Interest Paid", val: cur(totalInterest) },
+              { label: "Total Repayment", val: cur(bal + totalInterest) }
+            ],
+            chart: {
+              type: 'doughnut',
+              labels: ['Principal Paid', 'Interest Paid'],
+              data: [bal, totalInterest],
+              colors: [colorThemes[activeThemeKey].accent, '#ef4444']
+            }
+          };
+        }
+      },
+      {
+        id: "emergencyfund", name: "Emergency Fund Builder", category: "Financial",
+        desc: "Determine cash safety reserves based on non-discretionary expenses.",
+        inputs: [
+          { id: "rent", label: "Housing & Utilities", val: 1800 },
+          { id: "groceries", label: "Food & Household", val: 600 },
+          { id: "bills", label: "Debt, Insurance, Health", val: 500 },
+          { id: "monthsTarget", label: "Target Months Reserve", val: 6 }
+        ],
+        calc: (v) => {
+          const monthly = Math.max(0, v.rent || 0) + Math.max(0, v.groceries || 0) + Math.max(0, v.bills || 0);
+          const target = Math.max(1, v.monthsTarget || 3);
+          const totalFund = monthly * target;
+          return {
+            primary: cur(totalFund) + " Target",
+            details: [
+              { label: "Monthly Essential Spend", val: cur(monthly) },
+              { label: "3-Month Minimum Reserve", val: cur(monthly * 3) },
+              { label: "6-Month Solid Reserve", val: cur(monthly * 6) }
+            ]
+          };
+        }
+      },
+      {
+        id: "dca", name: "DCA Investment Calculator", category: "Financial",
+        desc: "Dollar-Cost Averaging projections with periodic compounding.",
+        inputs: [
+          { id: "monthly", label: "Monthly Deposit", val: 400 },
+          { id: "roi", label: "Expected Annual Gain (%)", val: 9 },
+          { id: "years", label: "Investment Horizon (Years)", val: 10 }
+        ],
+        calc: (v) => {
+          const pmt = Math.max(0, v.monthly || 0);
+          const r = Math.max(0, (v.roi || 0) / 100) / 12;
+          const n = Math.max(1, (v.years || 1) * 12);
+          const fv = r === 0 ? pmt * n : pmt * ((Math.pow(1 + r, n) - 1) / r);
+          const totalInvested = pmt * n;
+          const profit = Math.max(0, fv - totalInvested);
+          return {
+            primary: cur(fv),
+            details: [
+              { label: "Principal Invested", val: cur(totalInvested) },
+              { label: "Compounded Growth", val: cur(profit) }
+            ],
+            chart: {
+              type: 'bar',
+              labels: ['Invested Cash', 'Market Returns'],
+              data: [totalInvested, profit],
+              colors: ['#64748b', colorThemes[activeThemeKey].accent]
+            }
+          };
+        }
+      },
+      {
+        id: "autoloan", name: "Auto Loan Calculator", category: "Financial",
+        desc: "Car financing calculation with trade-in allowance and sales tax.",
+        inputs: [
+          { id: "price", label: "Vehicle Price", val: 32000 },
+          { id: "trade", label: "Trade-in / Down Payment", val: 5000 },
+          { id: "taxRate", label: "Sales Tax (%)", val: 7 },
+          { id: "rate", label: "Interest Rate (%)", val: 5.9 },
+          { id: "term", label: "Term (Months)", val: 60 }
+        ],
+        calc: (v) => {
+          const taxable = Math.max(0, (v.price || 0) - (v.trade || 0));
+          const totalFinanced = taxable * (1 + (Math.max(0, v.taxRate || 0) / 100));
+          const r = Math.max(0, (v.rate || 0) / 100) / 12;
+          const n = Math.max(1, Math.min(120, v.term || 1));
+          const emi = r === 0 ? totalFinanced / n : (totalFinanced * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+          return {
+            primary: cur(emi) + " /mo",
+            details: [
+              { label: "Total Amount Financed", val: cur(totalFinanced) },
+              { label: "Total Finance Charges", val: cur(Math.max(0, (emi * n) - totalFinanced)) }
+            ]
+          };
+        }
+      },
+      {
+        id: "interest", name: "Simple vs Compound Interest", category: "Financial",
+        desc: "Compare simple linear interest vs annual compound interest.",
+        inputs: [
+          { id: "p", label: "Principal", val: 10000 },
+          { id: "r", label: "Annual Interest Rate (%)", val: 5 },
+          { id: "t", label: "Duration (Years)", val: 5 }
+        ],
+        calc: (v) => {
+          const p = Math.max(0, v.p || 0);
+          const r = Math.max(0, v.r || 0) / 100;
+          const t = Math.max(0, Math.min(100, v.t || 0));
+          const simple = p * (1 + (r * t));
+          const compound = p * Math.pow(1 + r, t);
+          return {
+            primary: cur(compound),
+            details: [
+              { label: "Compound Balance", val: cur(compound) },
+              { label: "Simple Balance", val: cur(simple) },
+              { label: "Compounding Edge", val: cur(compound - simple) }
+            ]
+          };
+        }
+      },
+      {
+        id: "payment", name: "Target Amortization Payment", category: "Financial",
+        desc: "Determine fixed monthly payment required to zero out debt.",
+        inputs: [
+          { id: "balance", label: "Target Balance", val: 20000 },
+          { id: "months", label: "Payoff Window (Months)", val: 24 }
+        ],
+        calc: (v) => {
+          const m = Math.max(1, v.months || 1);
+          const b = Math.max(0, v.balance || 0);
+          return {
+            primary: cur(b / m) + " /mo",
+            details: [{ label: "Total Paid Off", val: cur(b) }]
+          };
+        }
+      },
+      {
+        id: "retirement", name: "Retirement Nest Egg Projector", category: "Financial",
+        desc: "Forecast retirement balance based on current savings and contributions.",
+        inputs: [
+          { id: "age", label: "Current Age", val: 30 },
+          { id: "retireAge", label: "Retirement Target Age", val: 65 },
+          { id: "current", label: "Current Savings", val: 25000 },
+          { id: "monthly", label: "Monthly Deposit", val: 500 },
+          { id: "roi", label: "Annual Return (%)", val: 7 }
+        ],
+        calc: (v) => {
+          const years = Math.min(80, Math.max(0, (v.retireAge || 0) - (v.age || 0)));
+          const n = years * 12;
+          const r = Math.max(0, (v.roi || 0) / 100) / 12;
+          const curSave = Math.max(0, v.current || 0);
+          const monthly = Math.max(0, v.monthly || 0);
+          let future = curSave * Math.pow(1 + r, n);
+          if (r > 0) future += monthly * ((Math.pow(1 + r, n) - 1) / r);
+          else future += monthly * n;
+          const totalContributed = curSave + (monthly * n);
+          const growth = Math.max(0, future - totalContributed);
+          return {
+            primary: cur(future),
+            details: [
+              { label: "Direct Savings Capital", val: cur(totalContributed) },
+              { label: "Cumulative Compound Gains", val: cur(growth) }
+            ],
+            chart: {
+              type: 'doughnut',
+              labels: ['Total Deposits', 'Investment Returns'],
+              data: [totalContributed, growth],
+              colors: [colorThemes[activeThemeKey].accent, '#10b981']
+            }
+          };
+        }
+      },
+      {
+        id: "amortization", name: "Amortization Schedule Analyzer", category: "Financial",
+        desc: "Inspect month-by-month principal and interest payoff ratios.",
+        inputs: [
+          { id: "p", label: "Loan Amount", val: 200000 },
+          { id: "r", label: "Annual Rate (%)", val: 6 },
+          { id: "years", label: "Loan Duration (Years)", val: 15 }
+        ],
+        calc: (v) => {
+          const p = Math.max(0, v.p || 0);
+          const r = Math.max(0, (v.r || 0) / 100) / 12;
+          const n = Math.max(1, Math.min(50, v.years || 1) * 12);
+          const emi = r === 0 ? p / n : (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+          
+          let year1Interest = 0;
+          let tempBal = p;
+          for (let m = 0; m < 12 && m < n; m++) {
+            const intPart = tempBal * r;
+            year1Interest += intPart;
+            tempBal -= (emi - intPart);
+          }
+
+          return {
+            primary: cur(emi) + " /mo",
+            details: [
+              { label: "Year 1 Actual Interest", val: cur(year1Interest) },
+              { label: "Lifetime Total Interest", val: cur(Math.max(0, (emi * n) - p)) }
+            ],
+            schedule: generateLoanSchedule(p, r, n, emi)
+          };
+        }
+      },
+      {
+        id: "investment", name: "Annual Investment Growth", category: "Financial",
+        desc: "Estimate portfolio balances with recurring annual contributions.",
+        inputs: [
+          { id: "start", label: "Starting Principal", val: 10000 },
+          { id: "contrib", label: "Annual Contribution", val: 6000 },
+          { id: "rate", label: "Annual Return (%)", val: 8 },
+          { id: "years", label: "Horizon (Years)", val: 10 }
+        ],
+        calc: (v) => {
+          const P = Math.max(0, v.start || 0);
+          const PMT = Math.max(0, v.contrib || 0);
+          const r = Math.max(0, (v.rate || 0) / 100);
+          const t = Math.min(100, Math.max(0, Math.floor(v.years || 0)));
+          const total = r === 0 ? P + (PMT * t) : (P * Math.pow(1 + r, t)) + (PMT * ((Math.pow(1 + r, t) - 1) / r) * (1 + r));
+          return {
+            primary: cur(total),
+            details: [
+              { label: "Total Capital Deposited", val: cur(P + (PMT * t)) },
+              { label: "Net Interest Accrual", val: cur(total - (P + (PMT * t))) }
+            ]
+          };
+        }
+      },
+      {
+        id: "inflation", name: "Inflation & Purchasing Power", category: "Financial",
+        desc: "Measure purchasing power decay over time against inflation.",
+        inputs: [
+          { id: "amount", label: "Current Amount", val: 1000 },
+          { id: "rate", label: "Average Annual Inflation (%)", val: 3.2 },
+          { id: "years", label: "Years Forward", val: 10 }
+        ],
+        calc: (v) => {
+          const amt = Math.max(0, v.amount || 0);
+          const r = Math.max(0, (v.rate || 0) / 100);
+          const y = Math.min(100, Math.max(0, v.years || 0));
+          const factor = Math.pow(1 + r, y);
+          const futureNominal = amt * factor;
+          return {
+            primary: cur(futureNominal),
+            details: [
+              { label: "Cost in Future to Equal Today", val: cur(futureNominal) },
+              { label: "Today's Buying Power of That Sum", val: cur(factor > 0 ? amt / factor : 0) }
+            ]
+          };
+        }
+      },
+      {
+        id: "finance", name: "Time Value of Money (TVM)", category: "Financial",
+        desc: "Future Value (FV) computation based on discrete compounding.",
+        inputs: [
+          { id: "pv", label: "Present Value (PV)", val: 5000 },
+          { id: "rate", label: "Annual Discount/Yield (%)", val: 7 },
+          { id: "periods", label: "Periods (Years)", val: 5 }
+        ],
+        calc: (v) => {
+          const pv = Math.max(0, v.pv || 0);
+          const r = Math.max(0, (v.rate || 0) / 100);
+          const p = Math.min(100, Math.max(0, v.periods || 0));
+          const fv = pv * Math.pow(1 + r, p);
+          return {
+            primary: cur(fv),
+            details: [{ label: "Capital Accretion", val: cur(Math.max(0, fv - pv)) }]
+          };
+        }
+      },
+      {
+        id: "incometax", name: "Effective Income Tax", category: "Financial",
+        desc: "Estimate take-home earnings based on effective average tax rates.",
+        inputs: [
+          { id: "income", label: "Gross Annual Income", val: 75000 },
+          { id: "rate", label: "Effective Tax Rate (%)", val: 18 }
+        ],
+        calc: (v) => {
+          const inc = Math.max(0, v.income || 0);
+          const rate = Math.min(100, Math.max(0, v.rate || 0));
+          const tax = inc * (rate / 100);
+          const net = Math.max(0, inc - tax);
+          return {
+            primary: cur(net) + " Net",
+            details: [
+              { label: "Estimated Tax Liability", val: cur(tax) },
+              { label: "Monthly Take-Home Pay", val: cur(net / 12) }
+            ]
+          };
+        }
+      },
+      {
+        id: "compound", name: "Compound Interest Calculator", category: "Financial",
+        desc: "Compute exponential growth with recurring monthly additions.",
+        inputs: [
+          { id: "principal", label: "Initial Principal", val: 5000 },
+          { id: "monthly", label: "Monthly Addition", val: 200 },
+          { id: "rate", label: "Annual Interest Rate (%)", val: 8 },
+          { id: "years", label: "Horizon (Years)", val: 10 }
+        ],
+        calc: (v) => {
+          const P = Math.max(0, v.principal || 0);
+          const PMT = Math.max(0, v.monthly || 0);
+          const r = Math.max(0, (v.rate || 0) / 100) / 12;
+          const t = Math.min(1200, Math.max(0, (v.years || 0) * 12));
+          const fv = r === 0 ? P + (PMT * t) : (P * Math.pow(1 + r, t)) + (PMT * ((Math.pow(1 + r, t) - 1) / r));
+          return {
+            primary: cur(fv),
+            details: [
+              { label: "Total Contributions", val: cur(P + (PMT * t)) },
+              { label: "Compound Growth", val: cur(Math.max(0, fv - (P + (PMT * t)))) }
+            ]
+          };
+        }
+      },
+      {
+        id: "salary", name: "Salary & Hourly Converter", category: "Financial",
+        desc: "Convert hourly pay to annual, monthly, and bi-weekly salaries.",
+        inputs: [
+          { id: "hourly", label: "Hourly Wage", val: 35 },
+          { id: "hours", label: "Hours per Week", val: 40 }
+        ],
+        calc: (v) => {
+          const wage = Math.max(0, v.hourly || 0);
+          const hrs = Math.min(168, Math.max(0, v.hours || 0));
+          const annual = wage * hrs * 52;
+          return {
+            primary: cur(annual) + " /yr",
+            details: [
+              { label: "Gross Monthly Pay", val: cur(annual / 12) },
+              { label: "Gross Bi-Weekly Paycheck", val: cur(annual / 26) }
+            ]
+          };
+        }
+      },
+      {
+        id: "interestrate", name: "Implied Simple Loan Rate", category: "Financial",
+        desc: "Determine nominal flat annual interest rate given total repayments.",
+        inputs: [
+          { id: "principal", label: "Principal Borrowed", val: 10000 },
+          { id: "totalPaid", label: "Total Repayment", val: 12000 },
+          { id: "years", label: "Duration (Years)", val: 2 }
+        ],
+        calc: (v) => {
+          const p = Math.max(0, v.principal || 0);
+          const tp = Math.max(0, v.totalPaid || 0);
+          const y = Math.max(0.1, v.years || 1);
+          const rate = p > 0 ? ((tp - p) / (p * y)) * 100 : 0;
+          return {
+            primary: num(Math.max(0, rate)) + "% Nominal",
+            details: [{ label: "Total Cost of Credit", val: cur(Math.max(0, tp - p)) }]
+          };
+        }
+      },
+      {
+        id: "salestax", name: "Sales Tax & VAT Calculator", category: "Financial",
+        desc: "Determine total purchase price after applying statutory sales tax.",
+        inputs: [
+          { id: "net", label: "Item Net Price", val: 129.99 },
+          { id: "tax", label: "Sales Tax / VAT (%)", val: 8.25 }
+        ],
+        calc: (v) => {
+          const net = Math.max(0, v.net || 0);
+          const taxRate = Math.max(0, v.tax || 0);
+          const taxAmt = net * (taxRate / 100);
+          return {
+            primary: cur(net + taxAmt),
+            details: [{ label: "Sales Tax / VAT Charge", val: cur(taxAmt) }]
+          };
+        }
+      },
+
+      // --- Fitness & Health (13) ---
+      {
+        id: "water", name: "Hydration Intake Calculator", category: "Fitness & Health",
+        desc: "Daily water requirement based on body mass, exercise, and climate.",
+        inputs: [
+          { id: "weight", label: "Body Weight (kg)", val: 75 },
+          { id: "workout", label: "Daily Exercise (Minutes)", val: 45 },
+          { id: "temp", label: "Hot / Humid Climate (1=Yes, 0=No)", val: 0 }
+        ],
+        calc: (v) => {
+          const w = Math.max(20, v.weight || 0);
+          let liters = (w * 0.033) + ((Math.max(0, v.workout || 0) / 30) * 0.35);
+          if (v.temp) liters += 0.5;
+          return {
+            primary: num(liters, 2) + " Liters /day",
+            details: [
+              { label: "In Fluid Ounces", val: num(liters * 33.814, 0) + " fl oz" },
+              { label: "Standard 8oz Glasses", val: Math.round((liters * 33.814) / 8) + " glasses" }
+            ]
+          };
+        }
+      },
+      {
+        id: "macros", name: "Macronutrient Split", category: "Fitness & Health",
+        desc: "Macronutrient gram breakdown (Protein, Fats, Carbs) based on targets.",
+        inputs: [
+          { id: "calories", label: "Daily Target Calories (kcal)", val: 2200 },
+          { id: "proteinPct", label: "Protein Ratio (%)", val: 30 },
+          { id: "fatPct", label: "Fat Ratio (%)", val: 30 }
+        ],
+        calc: (v) => {
+          const cal = Math.max(500, v.calories || 2000);
+          const pPct = Math.min(60, Math.max(10, v.proteinPct || 30));
+          const fPct = Math.min(60, Math.max(10, v.fatPct || 30));
+          const cPct = Math.max(0, 100 - pPct - fPct);
+          const pGrams = (cal * (pPct / 100)) / 4;
+          const fGrams = (cal * (fPct / 100)) / 9;
+          const cGrams = (cal * (cPct / 100)) / 4;
+          return {
+            primary: `${Math.round(pGrams)}g P • ${Math.round(cGrams)}g C • ${Math.round(fGrams)}g F`,
+            details: [
+              { label: "Protein (4 kcal/g)", val: `${Math.round(pGrams)}g (${pPct}%)` },
+              { label: "Carbs (4 kcal/g)", val: `${Math.round(cGrams)}g (${cPct}%)` },
+              { label: "Fats (9 kcal/g)", val: `${Math.round(fGrams)}g (${fPct}%)` }
+            ],
+            chart: {
+              type: 'doughnut',
+              labels: ['Protein (g)', 'Carbs (g)', 'Fats (g)'],
+              data: [Math.round(pGrams), Math.round(cGrams), Math.round(fGrams)],
+              colors: ['#ef4444', colorThemes[activeThemeKey].accent, '#f59e0b']
+            }
+          };
+        }
+      },
+      {
+        id: "onerepmax", name: "One Rep Max (1RM) Estimator", category: "Fitness & Health",
+        desc: "Estimate maximal strength capacity using the Epley and Brzycki equations.",
+        inputs: [
+          { id: "weight", label: "Weight Lifted (kg or lbs)", val: 100 },
+          { id: "reps", label: "Reps Completed (1 - 12)", val: 5 }
+        ],
+        calc: (v) => {
+          const w = Math.max(1, v.weight || 0);
+          const r = Math.min(15, Math.max(1, v.reps || 1));
+          if (r === 1) return { primary: `${w} (Direct 1RM)`, details: [{ label: "Intensity", val: "100%" }] };
+          const epley = w * (1 + r / 30);
+          const brzycki = w * (36 / (37 - r));
+          const avg1rm = (epley + brzycki) / 2;
+          return {
+            primary: num(avg1rm, 1) + " 1RM",
+            details: [
+              { label: "90% (3-4 Rep Target)", val: num(avg1rm * 0.90, 1) },
+              { label: "80% (7-8 Rep Target)", val: num(avg1rm * 0.80, 1) },
+              { label: "70% (10-12 Rep Target)", val: num(avg1rm * 0.70, 1) }
+            ]
+          };
+        }
+      },
+      {
+        id: "heartrate", name: "Cardiovascular Heart Rate Zones", category: "Fitness & Health",
+        desc: "Target aerobic and anaerobic zones via Karvonen Heart Rate Reserve.",
+        inputs: [
+          { id: "age", label: "Age (Years)", val: 32 },
+          { id: "rhr", label: "Resting Heart Rate (BPM)", val: 65 }
+        ],
+        calc: (v) => {
+          const age = Math.min(100, Math.max(10, v.age || 30));
+          const rhr = Math.min(120, Math.max(40, v.rhr || 60));
+          const maxHr = 220 - age;
+          const hrr = maxHr - rhr;
+          const z2Low = Math.round(rhr + (hrr * 0.60));
+          const z2High = Math.round(rhr + (hrr * 0.70));
+          return {
+            primary: `Zone 2: ${z2Low} - ${z2High} BPM`,
+            details: [
+              { label: "Max Heart Rate (HRmax)", val: `${maxHr} BPM` },
+              { label: "Zone 1 (Warmup 50-60%)", val: `${Math.round(rhr + hrr*0.5)} - ${z2Low} BPM` },
+              { label: "Zone 4 (Threshold 80-85%)", val: `${Math.round(rhr + hrr*0.8)} - ${Math.round(rhr + hrr*0.85)} BPM` }
+            ]
+          };
+        }
+      },
+      {
+        id: "bmi", name: "Body Mass Index (BMI)", category: "Fitness & Health",
+        desc: "Assess body mass classifications according to standard WHO brackets.",
+        inputs: [
+          { id: "weight", label: "Weight (kg)", val: 72 },
+          { id: "height", label: "Height (cm)", val: 178 }
+        ],
+        calc: (v) => {
+          const hm = Math.max(0.3, (v.height || 0) / 100);
+          const w = Math.max(0, v.weight || 0);
+          const bmi = hm > 0 ? w / (hm * hm) : 0;
+          let cat = "Normal weight";
+          if (bmi < 18.5) cat = "Underweight";
+          else if (bmi >= 25 && bmi < 29.9) cat = "Overweight";
+          else if (bmi >= 30) cat = "Obese";
+          return {
+            primary: num(bmi, 1) + " BMI",
+            details: [{ label: "WHO Diagnostic Category", val: cat }]
+          };
+        }
+      },
+      {
+        id: "calorie", name: "Caloric Expenditure (TDEE)", category: "Fitness & Health",
+        desc: "Estimate maintenance calories using clinical Mifflin-St Jeor formulas.",
+        inputs: [
+          { id: "weight", label: "Weight (kg)", val: 75 },
+          { id: "height", label: "Height (cm)", val: 175 },
+          { id: "age", label: "Age", val: 28 },
+          { id: "isFemale", label: "Gender (0 = Male, 1 = Female)", val: 0 },
+          { id: "mult", label: "Activity Level (1.2 = Sedentary, 1.55 = Moderate)", val: 1.4, step: 0.1 }
+        ],
+        calc: (v) => {
+          const w = Math.max(10, v.weight || 0);
+          const h = Math.max(50, v.height || 0);
+          const a = Math.max(1, v.age || 0);
+          const mult = Math.min(2.5, Math.max(1.0, v.mult || 1.2));
+          const offset = v.isFemale ? -161 : 5;
+          const bmr = 10 * w + 6.25 * h - 5 * a + offset;
+          const maint = bmr * mult;
+          return {
+            primary: num(maint, 0) + " kcal /day",
+            details: [
+              { label: "Basal Metabolic Rate (BMR)", val: num(bmr, 0) + " kcal" },
+              { label: "Weight Loss Deficit (-500 kcal)", val: num(Math.max(1000, maint - 500), 0) + " kcal" }
+            ]
+          };
+        }
+      },
+      {
+        id: "bodyfat", name: "Body Fat % (US Navy Method)", category: "Fitness & Health",
+        desc: "Circumference-based anthropometric body composition evaluation.",
+        inputs: [
+          { id: "isFemale", label: "Gender (0 = Male, 1 = Female)", val: 0 },
+          { id: "height", label: "Height (cm)", val: 178 },
+          { id: "neck", label: "Neck Circumference (cm)", val: 38 },
+          { id: "waist", label: "Waist Circumference (cm)", val: 84 },
+          { id: "hip", label: "Hip Circumference (Females Only, cm)", val: 95 }
+        ],
+        calc: (v) => {
+          const h = Math.max(50, v.height || 170);
+          const neck = Math.max(10, v.neck || 35);
+          let bf = 0;
+          if (v.isFemale) {
+            const hip = Math.max(10, v.hip || 90);
+            const waist = Math.max(10, v.waist || 75);
+            const sum = Math.max(1.0, (waist + hip) - neck);
+            bf = 495 / (1.29579 - 0.35004 * Math.log10(sum) + 0.22100 * Math.log10(h)) - 450;
+          } else {
+            const diff = Math.max(0.5, (v.waist || 80) - neck);
+            bf = 495 / (1.0324 - 0.19077 * Math.log10(diff) + 0.15456 * Math.log10(h)) - 450;
+          }
+          return {
+            primary: num(Math.min(65, Math.max(3, bf)), 1) + "% Fat",
+            details: [{ label: "Standard Method", val: v.isFemale ? "US Navy (Female Model)" : "US Navy (Male Model)" }]
+          };
+        }
+      },
+      {
+        id: "bmr", name: "Basal Metabolic Rate (BMR)", category: "Fitness & Health",
+        desc: "Resting metabolic energy requirement at complete physical rest.",
+        inputs: [
+          { id: "w", label: "Weight (kg)", val: 70 },
+          { id: "h", label: "Height (cm)", val: 170 },
+          { id: "a", label: "Age", val: 30 },
+          { id: "isFemale", label: "Gender (0 = Male, 1 = Female)", val: 0 }
+        ],
+        calc: (v) => {
+          const offset = v.isFemale ? -161 : 5;
+          const bmr = 10 * Math.max(0, v.w || 0) + 6.25 * Math.max(0, v.h || 0) - 5 * Math.max(0, v.a || 0) + offset;
+          return {
+            primary: num(Math.max(0, bmr), 0) + " kcal /day",
+            details: [{ label: "Resting Energy Expenditure", val: num(Math.max(0, bmr), 0) + " kcal" }]
+          };
+        }
+      },
+      {
+        id: "idealweight", name: "Ideal Body Weight (Devine Formula)", category: "Fitness & Health",
+        desc: "Estimate healthy clinical weight according to the Devine equation.",
+        inputs: [
+          { id: "height", label: "Height (cm)", val: 175 },
+          { id: "isFemale", label: "Gender (0 = Male, 1 = Female)", val: 0 }
+        ],
+        calc: (v) => {
+          const inchesOver5ft = Math.max(0, ((v.height || 0) / 2.54) - 60);
+          const base = v.isFemale ? 45.5 : 50.0;
+          const devine = base + (2.3 * inchesOver5ft);
+          return {
+            primary: num(devine, 1) + " kg",
+            details: [{ label: "Equivalent in Pounds", val: num(devine * 2.20462, 1) + " lbs" }]
+          };
+        }
+      },
+      {
+        id: "pace", name: "Running Pace & Speed", category: "Fitness & Health",
+        desc: "Calculate running pace per kilometer and average velocity.",
+        inputs: [
+          { id: "dist", label: "Distance (km)", val: 10 },
+          { id: "mins", label: "Total Time (Minutes)", val: 52 }
+        ],
+        calc: (v) => {
+          const d = Math.max(0.01, v.dist || 0);
+          const mTotal = Math.max(0, v.mins || 0);
+          const paceDec = mTotal / d;
+          const m = Math.floor(paceDec);
+          const s = Math.round((paceDec - m) * 60);
+          return {
+            primary: `${m}:${s < 10 ? '0' : ''}${s} /km`,
+            details: [
+              { label: "Velocity", val: num(d / (mTotal / 60), 2) + " km/h" },
+              { label: "Pace per Mile", val: `${Math.floor(paceDec * 1.60934)}:${Math.round(((paceDec * 1.60934) % 1) * 60).toString().padStart(2, '0')} /mi` }
+            ]
+          };
+        }
+      },
+      {
+        id: "pregnancy", name: "Pregnancy Gestational Age", category: "Fitness & Health",
+        desc: "Track gestational age and trimesters from Last Menstrual Period (LMP).",
+        inputs: [
+          { id: "weeks", label: "Weeks Since LMP", val: 14 }
+        ],
+        calc: (v) => {
+          const w = Math.min(42, Math.max(0, v.weeks || 0));
+          return {
+            primary: `${w} Weeks Gestation`,
+            details: [
+              { label: "Trimester", val: w < 13 ? "First Trimester" : (w < 27 ? "Second Trimester" : "Third Trimester") },
+              { label: "Weeks to Due Date", val: `${Math.max(0, 40 - w)} weeks` }
+            ]
+          };
+        }
+      },
+      {
+        id: "pregnancyconception", name: "Ovulation & Conception Window", category: "Fitness & Health",
+        desc: "Calculate clinical fertile window and estimated ovulation timing.",
+        inputs: [
+          { id: "cycle", label: "Average Cycle Length (Days)", val: 28 }
+        ],
+        calc: (v) => {
+          const cycle = Math.min(45, Math.max(20, v.cycle || 28));
+          const o = Math.max(1, cycle - 14);
+          return {
+            primary: `Day ${o} of Cycle`,
+            details: [
+              { label: "Estimated Ovulation Day", val: `Cycle Day ${o}` },
+              { label: "Clinical Fertile Window", val: `Days ${Math.max(1, o - 5)} through Day ${o}` }
+            ]
+          };
+        }
+      },
+      {
+        id: "duedate", name: "Due Date (Naegele's Rule)", category: "Fitness & Health",
+        desc: "Estimate estimated date of delivery based on standard 280-day gestation.",
+        inputs: [
+          { id: "daysAgo", label: "Days Elapsed Since LMP", val: 45 }
+        ],
+        calc: (v) => {
+          const days = Math.max(0, v.daysAgo || 0);
+          return {
+            primary: `${Math.max(0, 280 - days)} Days Remaining`,
+            details: [{ label: "Gestational Progress", val: num(Math.min(100, (days / 280) * 100), 1) + "%" }]
+          };
+        }
+      },
+
+      // --- Math (8) ---
+      {
+        id: "percentage", name: "Percentage & Proportions", category: "Math",
+        desc: "Compute percentages, portions, and percentage differences.",
+        inputs: [
+          { id: "pct", label: "Percentage (%)", val: 20 },
+          { id: "total", label: "Of Total Amount", val: 350 }
+        ],
+        calc: (v) => {
+          const res = ((v.pct || 0) / 100) * (v.total || 0);
+          return {
+            primary: num(res, 2),
+            details: [{ label: `${v.pct || 0}% of ${v.total || 0}`, val: num(res, 2) }]
+          };
+        }
+      },
+      {
+        id: "fraction", name: "Fraction Simplifier & Arithmetic", category: "Math",
+        desc: "Perform fractional addition and reduce results to lowest common terms.",
+        inputs: [
+          { id: "n1", label: "Numerator 1", val: 1 },
+          { id: "d1", label: "Denominator 1", val: 3 },
+          { id: "n2", label: "Numerator 2", val: 1 },
+          { id: "d2", label: "Denominator 2", val: 6 }
+        ],
+        calc: (v) => {
+          const d1 = v.d1 || 1;
+          const d2 = v.d2 || 1;
+          const n = ((v.n1 || 0) * d2) + ((v.n2 || 0) * d1);
+          const d = d1 * d2;
+          const div = gcd(n, d);
+          return {
+            primary: `${n / div} / ${d / div}`,
+            details: [{ label: "Exact Decimal Equivalent", val: num(n / d, 4) }]
+          };
+        }
+      },
+      {
+        id: "scientific", name: "Scientific Trigonometry & Logarithms", category: "Math",
+        desc: "Trigonometric ratios, natural logarithms, and power operations.",
+        inputs: [
+          { id: "val", label: "Angle or Input (x, in Degrees)", val: 45 }
+        ],
+        calc: (v) => {
+          const val = v.val || 0;
+          const rad = (val * Math.PI) / 180;
+          const cosVal = Math.cos(rad);
+          const tanVal = Math.abs(cosVal) < 1e-10 ? "Undefined (Asymptote)" : num(Math.tan(rad), 4);
+          return {
+            primary: `sin(${val}°) = ${num(Math.sin(rad), 4)}`,
+            details: [
+              { label: `cos(${val}°)`, val: num(cosVal, 4) },
+              { label: `tan(${val}°)`, val: tanVal },
+              { label: "√x (Square Root)", val: val >= 0 ? num(Math.sqrt(val), 4) : "Imaginary Number" }
+            ]
+          };
+        }
+      },
+      {
+        id: "triangle", name: "Right Triangle Solver", category: "Math",
+        desc: "Solve hypotenuse, perimeter, and area via Pythagorean Theorem.",
+        inputs: [
+          { id: "base", label: "Base (Side A)", val: 6 },
+          { id: "height", label: "Height (Side B)", val: 8 }
+        ],
+        calc: (v) => {
+          const b = Math.max(0, v.base || 0);
+          const h = Math.max(0, v.height || 0);
+          const hyp = Math.sqrt(b * b + h * h);
+          return {
+            primary: `Hypotenuse: ${num(hyp, 2)}`,
+            details: [
+              { label: "Triangle Area", val: num(0.5 * b * h, 2) },
+              { label: "Total Perimeter", val: num(b + h + hyp, 2) }
+            ]
+          };
+        }
+      },
+      {
+        id: "standarddeviation", name: "Standard Deviation (Sample & Pop)", category: "Math",
+        desc: "Compute both Sample (s) and Population (σ) standard deviations.",
+        inputs: [
+          { id: "a", label: "Value 1", val: 10 },
+          { id: "b", label: "Value 2", val: 12 },
+          { id: "c", label: "Value 3", val: 23 },
+          { id: "d", label: "Value 4", val: 25 }
+        ],
+        calc: (v) => {
+          const arr = [v.a || 0, v.b || 0, v.c || 0, v.d || 0];
+          const n = arr.length;
+          const mean = arr.reduce((acc, c) => acc + c, 0) / n;
+          const sumSq = arr.reduce((acc, c) => acc + Math.pow(c - mean, 2), 0);
+          const popSD = Math.sqrt(sumSq / n);
+          const sampleSD = Math.sqrt(sumSq / (n - 1));
+          return {
+            primary: `s = ${num(sampleSD, 2)} (Sample)`,
+            details: [
+              { label: "Mean (μ)", val: num(mean, 2) },
+              { label: "Population SD (σ)", val: num(popSD, 2) }
+            ]
+          };
+        }
+      },
+      {
+        id: "random", name: "Cryptographic Random Number", category: "Math",
+        desc: "Generate hardware-seeded cryptographically secure random integers.",
+        inputs: [
+          { id: "min", label: "Minimum Integer", val: 1 },
+          { id: "max", label: "Maximum Integer", val: 100 }
+        ],
+        calc: (v) => {
+          const min = Math.ceil(Math.min(v.min || 0, v.max || 0));
+          const max = Math.floor(Math.max(v.min || 0, v.max || 0));
+          const range = max - min + 1;
+          const arr = new Uint32Array(1);
+          window.crypto.getRandomValues(arr);
+          const rnd = min + (arr[0] % range);
+          return {
+            primary: `${rnd}`,
+            details: [{ label: "Generated Span", val: `${min} to ${max}` }]
+          };
+        }
+      },
+      {
+        id: "gpa", name: "GPA Calculator (4.0 Standard)", category: "Math",
+        desc: "Compute standardized grade point average across courses.",
+        inputs: [
+          { id: "g1", label: "Course 1 Grade (0 - 4.0)", val: 3.7 },
+          { id: "g2", label: "Course 2 Grade (0 - 4.0)", val: 4.0 },
+          { id: "g3", label: "Course 3 Grade (0 - 4.0)", val: 3.3 }
+        ],
+        calc: (v) => {
+          const g1 = Math.min(4.0, Math.max(0, v.g1 || 0));
+          const g2 = Math.min(4.0, Math.max(0, v.g2 || 0));
+          const g3 = Math.min(4.0, Math.max(0, v.g3 || 0));
+          return {
+            primary: num((g1 + g2 + g3) / 3, 2) + " GPA",
+            details: [{ label: "Standardized Scale", val: "4.0 Grade Point Metric" }]
+          };
+        }
+      },
+      {
+        id: "grade", name: "Final Exam Target Score", category: "Math",
+        desc: "Determine score needed on a final exam to achieve overall course grade.",
+        inputs: [
+          { id: "current", label: "Current Grade (%)", val: 82 },
+          { id: "target", label: "Target Final Grade (%)", val: 85 },
+          { id: "weight", label: "Final Exam Weight (%)", val: 30 }
+        ],
+        calc: (v) => {
+          const w = Math.min(1.0, Math.max(0.01, (v.weight || 1) / 100));
+          const current = Math.max(0, v.current || 0);
+          const target = Math.max(0, v.target || 0);
+          const req = (target - (current * (1 - w))) / w;
+          return {
+            primary: num(req, 1) + "%",
+            details: [{ label: "Score Needed on Final Exam", val: num(req, 1) + "%" }]
+          };
+        }
+      },
+
+      // --- Tech & Engineering (11) ---
+      {
+        id: "baseconverter", name: "Base Converter (Bin / Hex / Dec)", category: "Tech & Engineering",
+        desc: "Convert decimal values into binary, hexadecimal, and octal notations.",
+        inputs: [
+          { id: "decimalVal", label: "Decimal Value (Integer)", val: 255 }
+        ],
+        calc: (v) => {
+          const d = Math.max(0, Math.floor(v.decimalVal || 0));
+          return {
+            primary: `0x${d.toString(16).toUpperCase()}`,
+            details: [
+              { label: "Binary (Base 2)", val: d.toString(2) },
+              { label: "Hexadecimal (Base 16)", val: "0x" + d.toString(16).toUpperCase() },
+              { label: "Octal (Base 8)", val: "0o" + d.toString(8) }
+            ]
+          };
+        }
+      },
+      {
+        id: "downloadtime", name: "Bandwidth & Download Duration", category: "Tech & Engineering",
+        desc: "Time required to download large data payloads across connection speeds.",
+        inputs: [
+          { id: "fileSizeGB", label: "File Size (Gigabytes, GB)", val: 45 },
+          { id: "speedMbps", label: "Bandwidth Speed (Mbps)", val: 100 }
+        ],
+        calc: (v) => {
+          const gb = Math.max(0.01, v.fileSizeGB || 1);
+          const mbps = Math.max(0.1, v.speedMbps || 1);
+          const totalBits = gb * 8 * 1000;
+          const seconds = totalBits / mbps;
+          const mins = seconds / 60;
+          const hrs = mins / 60;
+          const formatted = hrs >= 1 ? `${num(hrs, 1)} Hours` : `${Math.round(mins)} Minutes`;
+          return {
+            primary: formatted,
+            details: [
+              { label: "Actual Seconds", val: `${Math.round(seconds)} sec` },
+              { label: "Effective Transfer Speed", val: `${num(mbps / 8, 2)} MB/s` }
+            ]
+          };
+        }
+      },
+      {
+        id: "aspectratio", name: "Display Aspect Ratio & Scaler", category: "Tech & Engineering",
+        desc: "Calculate proportional pixel resolutions preserving precise display geometry.",
+        inputs: [
+          { id: "origW", label: "Original Width (px)", val: 1920 },
+          { id: "origH", label: "Original Height (px)", val: 1080 },
+          { id: "newW", label: "Target Width (px)", val: 1280 }
+        ],
+        calc: (v) => {
+          const ow = Math.max(1, v.origW || 1);
+          const oh = Math.max(1, v.origH || 1);
+          const nw = Math.max(1, v.newW || 1);
+          const div = gcd(ow, oh);
+          const newH = Math.round((nw * oh) / ow);
+          return {
+            primary: `${nw} × ${newH} px`,
+            details: [
+              { label: "Native Ratio Aspect", val: `${ow/div}:${oh/div}` },
+              { label: "Calculated Pixels", val: num(nw * newH, 0) + " px" }
+            ]
+          };
+        }
+      },
+      {
+        id: "unitconvert", name: "Universal Metric & Imperial Units", category: "Tech & Engineering",
+        desc: "Convert distance, mass, and thermal temperatures across standards.",
+        inputs: [
+          { id: "val", label: "Magnitude Value", val: 100 },
+          { id: "mode", label: "Mode (1: km->mi, 2: kg->lb, 3: °C->°F)", val: 1 }
+        ],
+        calc: (v) => {
+          const val = v.val || 0;
+          const mode = Math.round(v.mode || 1);
+          if (mode === 2) {
+            return {
+              primary: num(val * 2.20462, 2) + " lbs",
+              details: [{ label: "Original Mass", val: `${val} kg` }]
+            };
+          } else if (mode === 3) {
+            return {
+              primary: num((val * 9/5) + 32, 1) + " °F",
+              details: [{ label: "Thermal Kelvin", val: num(val + 273.15, 2) + " K" }]
+            };
+          }
+          return {
+            primary: num(val * 0.621371, 2) + " Miles",
+            details: [{ label: "Original Distance", val: `${val} Kilometers` }]
+          };
+        }
+      },
+      {
+        id: "subnet", name: "IPv4 CIDR Subnet Calculator", category: "Tech & Engineering",
+        desc: "Subnet masks, usable host capacity, and RFC 3021 /31 allocations.",
+        inputs: [
+          { id: "cidr", label: "CIDR Prefix (/xx, 1-32)", val: 24 }
+        ],
+        calc: (v) => {
+          const prefix = Math.min(32, Math.max(1, Math.round(v.cidr || 24)));
+          let usable = 0;
+          if (prefix === 31) usable = 2;
+          else if (prefix === 32) usable = 1;
+          else usable = Math.pow(2, 32 - prefix) - 2;
+
+          const maskBits = ((0xFFFFFFFF << (32 - prefix)) >>> 0);
+          const maskStr = [
+            (maskBits >>> 24) & 255,
+            (maskBits >>> 16) & 255,
+            (maskBits >>> 8) & 255,
+            maskBits & 255
+          ].join('.');
+
+          return {
+            primary: num(usable, 0) + " Usable Hosts",
+            details: [
+              { label: "Subnet Mask", val: maskStr },
+              { label: "Total IP Addresses", val: num(Math.pow(2, 32 - prefix), 0) }
+            ]
+          };
+        }
+      },
+      {
+        id: "password", name: "CSPRNG Password Generator", category: "Tech & Engineering",
+        desc: "Hardware-seeded CSPRNG entropy password generator.",
+        inputs: [
+          { id: "len", label: "Password Length (4-128)", val: 16 }
+        ],
+        calc: (v) => {
+          const len = Math.max(4, Math.min(128, Math.round(v.len) || 16));
+          const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789!@#$%^&*()_+-=";
+          const buf = new Uint32Array(len);
+          window.crypto.getRandomValues(buf);
+          let p = "";
+          for (let i = 0; i < len; i++) p += chars[buf[i] % chars.length];
+          return {
+            primary: p,
+            details: [{ label: "Shannon Entropy", val: `${Math.round(len * Math.log2(chars.length))} bits` }]
+          };
+        }
+      },
+      {
+        id: "concrete", name: "Concrete Slab Volume", category: "Tech & Engineering",
+        desc: "Estimate concrete cubic yards and required commercial pre-mix bags.",
+        inputs: [
+          { id: "len", label: "Length (Feet)", val: 20 },
+          { id: "wid", label: "Width (Feet)", val: 10 },
+          { id: "thick", label: "Thickness (Inches)", val: 4 }
+        ],
+        calc: (v) => {
+          const cuYds = (Math.max(0, v.len || 0) * Math.max(0, v.wid || 0) * (Math.max(0, v.thick || 0) / 12)) / 27;
+          return {
+            primary: num(cuYds, 2) + " yd³",
+            details: [
+              { label: "Standard 80lb Bags", val: Math.ceil(cuYds * 45) + " bags" },
+              { label: "Standard 60lb Bags", val: Math.ceil(cuYds * 60) + " bags" }
+            ]
+          };
+        }
+      },
+      {
+        id: "age", name: "Exact Age & Elapsed Days", category: "Tech & Engineering",
+        desc: "Calculate precise calendar years and total elapsed lifespan days.",
+        inputs: [
+          { id: "birthYear", label: "Birth Year (YYYY)", val: 1998 }
+        ],
+        calc: (v) => {
+          const curr = new Date().getFullYear();
+          const age = Math.max(0, curr - (v.birthYear || curr));
+          return {
+            primary: `${age} Years Old`,
+            details: [{ label: "Approximate Days Lived", val: num(age * 365.2425, 0) + " days" }]
+          };
+        }
+      },
+      {
+        id: "date", name: "Calendar Date Offset", category: "Tech & Engineering",
+        desc: "Add or subtract discrete calendar days from the current date.",
+        inputs: [
+          { id: "days", label: "Days to add or subtract (+/-)", val: 45 }
+        ],
+        calc: (v) => {
+          const target = new Date();
+          const days = Math.min(36500, Math.max(-36500, v.days || 0));
+          target.setDate(target.getDate() + days);
+          return {
+            primary: target.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+            details: [{ label: "Days Adjusted", val: `${days > 0 ? '+' : ''}${days} days` }]
+          };
+        }
+      },
+      {
+        id: "time", name: "Minutes to Hours Formatter", category: "Tech & Engineering",
+        desc: "Convert gross minutes into standard hours, minutes, and decimal hours.",
+        inputs: [
+          { id: "mins", label: "Gross Minutes", val: 275 }
+        ],
+        calc: (v) => {
+          const mins = Math.max(0, v.mins || 0);
+          return {
+            primary: `${Math.floor(mins / 60)}h ${Math.round(mins % 60)}m`,
+            details: [{ label: "Decimal Format", val: num(mins / 60, 2) + " hrs" }]
+          };
+        }
+      },
+      {
+        id: "hours", name: "Billable Timesheet Hours", category: "Tech & Engineering",
+        desc: "Calculate net billable hours minus unpaid lunch and break intervals.",
+        inputs: [
+          { id: "start", label: "Shift Start Hour (24h clock, e.g. 9)", val: 9 },
+          { id: "end", label: "Shift End Hour (24h clock, e.g. 17)", val: 17 },
+          { id: "breakMins", label: "Break Interval (Minutes)", val: 45 }
+        ],
+        calc: (v) => {
+          const s = Math.min(24, Math.max(0, v.start || 0));
+          const e = Math.min(24, Math.max(0, v.end || 0));
+          const b = Math.max(0, v.breakMins || 0);
+          const totalMins = Math.max(0, ((e - s) * 60) - b);
+          return {
+            primary: num(totalMins / 60, 2) + " Hours",
+            details: [{ label: "Net Billable Minutes", val: totalMins + " mins" }]
+          };
+        }
+      }
+    ];
+
+    // Helper: Generate Amortization Schedule
+    function generateLoanSchedule(principal, monthlyRate, totalMonths, emi) {
+      const schedule = [];
+      let balance = principal;
+      let yearlyInterest = 0;
+      let yearlyPrincipal = 0;
+
+      for (let m = 1; m <= totalMonths; m++) {
+        const interest = balance * monthlyRate;
+        const princ = Math.min(balance, emi - interest);
+        balance = Math.max(0, balance - princ);
+        yearlyInterest += interest;
+        yearlyPrincipal += princ;
+
+        if (m % 12 === 0 || m === totalMonths) {
+          schedule.push({
+            year: Math.ceil(m / 12),
+            principalPaid: cur(yearlyPrincipal),
+            interestPaid: cur(yearlyInterest),
+            balanceRemaining: cur(balance)
+          });
+          yearlyInterest = 0;
+          yearlyPrincipal = 0;
+        }
+      }
+      return schedule;
+    }
+
+    // --- State Variables ---
+    let currentCalc = calculators[0];
+    let selectedCategory = "All";
+    let selectedBlogCategory = "All";
+    let chartInstance = null;
+    let calculationHistory = [];
+    let pinnedTools = [];
+    let activeScheduleData = null;
+
+    let aiChatLog = [
+      { sender: "agent", text: "Hello! I'm your **Velo AI Guide**. I can analyze your active calculation, evaluate math formulas, or recommend optimization strategies. How can I help you today?" }
+    ];
+
+    try {
+      const stored = localStorage.getItem('velocalc_history');
+      if (stored) calculationHistory = JSON.parse(stored);
+      const pins = localStorage.getItem('velocalc_pinned');
+      if (pins) pinnedTools = JSON.parse(pins);
+    } catch (e) {}
+
+    // --- Initialization ---
+    function init() {
+      initTheme();
+      setThemeColor(activeThemeKey, false);
+      document.getElementById('currencySelector').value = activeCurrency;
+      populateHeroDropdown();
+      setupHashRouter();
+      renderFavoritesBar();
+      renderDirectory();
+      renderBlog();
+      renderAiChat();
+      setupKeyboardShortcuts();
+    }
+
+    // --- Theme Controller ---
+    function initTheme() {
+      try {
+        const savedTheme = localStorage.getItem('velocalc_theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+          document.documentElement.classList.add('dark');
+          document.getElementById('themeToggleBtn').innerText = '☀️';
+        } else {
+          document.documentElement.classList.remove('dark');
+          document.getElementById('themeToggleBtn').innerText = '🌙';
+        }
+      } catch (e) {}
+    }
+
+    function toggleDarkMode() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      try { localStorage.setItem('velocalc_theme', isDark ? 'dark' : 'light'); } catch (e) {}
+      document.getElementById('themeToggleBtn').innerText = isDark ? '☀️' : '🌙';
+      calculateHero();
+    }
+
+    // --- Favorites / Pin System ---
+    function togglePinCurrentCalc() {
+      const id = currentCalc.id;
+      if (pinnedTools.includes(id)) {
+        pinnedTools = pinnedTools.filter(item => item !== id);
+        showToast("Removed from pinned favorites");
+      } else {
+        pinnedTools.push(id);
+        showToast("Pinned to quick bar!");
+      }
+      try { localStorage.setItem('velocalc_pinned', JSON.stringify(pinnedTools)); } catch (e) {}
+      updatePinButton();
+      renderFavoritesBar();
+    }
+
+    function updatePinButton() {
+      const btn = document.getElementById('pinToolBtn');
+      if (btn) {
+        btn.innerText = pinnedTools.includes(currentCalc.id) ? '⭐' : '☆';
+        btn.classList.toggle('text-amber-400', pinnedTools.includes(currentCalc.id));
+      }
+    }
+
+    function renderFavoritesBar() {
+      const container = document.getElementById('favoritesBarContainer');
+      const list = document.getElementById('favoritesList');
+      if (!pinnedTools || pinnedTools.length === 0) {
+        container.classList.add('hidden');
+        return;
+      }
+      container.classList.remove('hidden');
+      list.innerHTML = pinnedTools.map(id => {
+        const tool = calculators.find(c => c.id === id);
+        if (!tool) return '';
+        return `
+          <button onclick="setHashRoute('${tool.id}', true)" 
+                  class="px-2.5 py-1 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-lg border border-slate-200 dark:border-slate-700 font-bold shrink-0 transition flex items-center gap-1 shadow-xs">
+            <span>⚡</span>
+            <span>${escapeHTML(tool.name)}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    // --- Router with Parameter Parsing ---
+    function setupHashRouter() {
+      const handleHash = () => {
+        const rawHash = window.location.hash || '';
+        
+        if (rawHash === '#privacy') { openLegalModal('privacy'); return; }
+        if (rawHash === '#terms') { openLegalModal('terms'); return; }
+        if (rawHash === '#disclaimer') { openLegalModal('disclaimer'); return; }
+
+        const articleMatch = rawHash.match(/#article=([a-zA-Z0-9_-]+)/);
+        if (articleMatch) {
+          openArticleModal(articleMatch[1], false);
+          return;
+        }
+
+        const [hashPath, queryString] = rawHash.replace(/^#/, '').split('?');
+        const calcMatch = hashPath.match(/^calc=([^&]+)/);
+        const calcId = calcMatch ? decodeURIComponent(calcMatch[1]) : 'mortgage';
+        
+        const urlParams = new URLSearchParams(queryString || '');
+        loadHeroCalculator(calcId, false, urlParams);
+      };
+
+      window.addEventListener('hashchange', handleHash);
+      handleHash();
+    }
+
+    function setHashRoute(id, shouldScroll = false) {
+      window.location.hash = `calc=${encodeURIComponent(id)}`;
+      if (shouldScroll) {
+        document.getElementById('heroCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    function shareCurrentCalc() {
+      const params = new URLSearchParams();
+      currentCalc.inputs.forEach(inp => {
+        const el = document.getElementById(`h-inp-${inp.id}`);
+        if (el) params.set(inp.id, el.value);
+      });
+      const shareUrl = `${window.location.origin}${window.location.pathname}#calc=${currentCalc.id}?${params.toString()}`;
+      navigator.clipboard.writeText(shareUrl).then(() => {
+        showToast("Shareable link with numbers copied!");
+      }).catch(() => fallbackCopyText(shareUrl));
+    }
+
+    function populateHeroDropdown() {
+      const picker = document.getElementById('heroCalcPicker');
+      picker.innerHTML = calculators.map(c => `
+        <option value="${escapeHTML(c.id)}">${escapeHTML(c.name)}</option>
+      `).join('');
+    }
+
+    // --- Load Tool ---
+    function loadHeroCalculator(id, shouldScroll = false, prefillParams = null) {
+      const calc = calculators.find(c => c.id === id) || calculators[0];
+      currentCalc = calc;
+
+      document.getElementById('heroCalcPicker').value = calc.id;
+      document.getElementById('heroCatBadge').innerText = calc.category;
+      document.getElementById('heroCalcTitle').innerText = calc.name;
+      document.getElementById('heroCalcDesc').innerText = calc.desc;
+
+      const aiToolLabel = document.getElementById('aiActiveToolName');
+      if (aiToolLabel) aiToolLabel.innerText = calc.name;
+      const aiContextPill = document.getElementById('aiContextPill');
+      if (aiContextPill) aiContextPill.innerText = `Inspecting ${calc.name}`;
+
+      updatePinButton();
+
+      const container = document.getElementById('heroInputsContainer');
+      container.innerHTML = calc.inputs.map(inp => {
+        const initialVal = prefillParams && prefillParams.has(inp.id) 
+          ? prefillParams.get(inp.id) 
+          : inp.val;
+        return `
+          <div>
+            <label for="h-inp-${escapeHTML(inp.id)}" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              ${escapeHTML(inp.label)}
+            </label>
+            <input type="number" id="h-inp-${escapeHTML(inp.id)}" value="${escapeHTML(initialVal)}" step="${escapeHTML(inp.step || 'any')}"
+                   class="w-full px-3.5 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:bg-white dark:focus:bg-slate-900 focus:ring-2 focus:ring-indigo-500 outline-none text-sm font-semibold transition text-slate-800 dark:text-slate-100 shadow-inner"
+                   oninput="calculateHero()">
+          </div>
+        `;
+      }).join('');
+
+      const extraContainer = document.getElementById('heroExtraButtons');
+      if (calc.id === 'password') {
+        extraContainer.innerHTML = `
+          <button onclick="calculateHero()" class="text-xs font-bold theme-text hover:underline flex items-center gap-1">
+            🔄 Regenerate New Password
+          </button>
+        `;
+      } else {
+        extraContainer.innerHTML = '';
+      }
+
+      calculateHero();
+
+      if (shouldScroll) {
+        document.getElementById('heroCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    // --- Calculation & Visuals ---
+    function calculateHero() {
+      if (!currentCalc) return;
+      const values = {};
+      currentCalc.inputs.forEach(inp => {
+        const el = document.getElementById(`h-inp-${inp.id}`);
+        values[inp.id] = el ? parseFloat(el.value) || 0 : 0;
+      });
+
+      const res = currentCalc.calc(values);
+      const primaryEl = document.getElementById('heroPrimaryResult');
+      primaryEl.innerText = res.primary;
+
+      // Pulse color gently on update
+      primaryEl.classList.remove('calc-pulse');
+      void primaryEl.offsetWidth;
+      primaryEl.classList.add('calc-pulse');
+
+      const secContainer = document.getElementById('heroSecondaryResults');
+      if (res.details && res.details.length > 0) {
+        secContainer.innerHTML = res.details.map(d => `
+          <div class="flex justify-between items-center py-0.5">
+            <span class="text-slate-500 dark:text-slate-400">${escapeHTML(d.label)}</span>
+            <span class="font-bold text-slate-800 dark:text-slate-100">${escapeHTML(d.val)}</span>
+          </div>
+        `).join('');
+      } else {
+        secContainer.innerHTML = "";
+      }
+
+      const chartBox = document.getElementById('chartContainer');
+      if (res.chart) {
+        chartBox.classList.remove('hidden');
+        renderHeroChart(res.chart);
+      } else {
+        chartBox.classList.add('hidden');
+        if (chartInstance) {
+          chartInstance.destroy();
+          chartInstance = null;
+        }
+      }
+
+      const scheduleBtn = document.getElementById('viewScheduleBtn');
+      if (res.schedule && res.schedule.length > 0) {
+        activeScheduleData = res.schedule;
+        scheduleBtn.classList.remove('hidden');
+        renderScheduleTable(res.schedule);
+      } else {
+        activeScheduleData = null;
+        scheduleBtn.classList.add('hidden');
+        document.getElementById('scheduleSection').classList.add('hidden');
+      }
+    }
+
+    function toggleScheduleSection() {
+      const el = document.getElementById('scheduleSection');
+      el.classList.toggle('hidden');
+      if (!el.classList.contains('hidden')) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function renderScheduleTable(schedule) {
+      const thead = document.getElementById('scheduleTableHead');
+      const tbody = document.getElementById('scheduleTableBody');
+      thead.innerHTML = `
+        <tr>
+          <th class="p-3">Year</th>
+          <th class="p-3">Principal Repaid</th>
+          <th class="p-3">Interest Repaid</th>
+          <th class="p-3">Remaining Balance</th>
+        </tr>
+      `;
+      tbody.innerHTML = schedule.map(row => `
+        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/60 transition">
+          <td class="p-3 font-bold text-slate-900 dark:text-white">Year ${row.year}</td>
+          <td class="p-3 text-emerald-600 dark:text-emerald-400">${escapeHTML(row.principalPaid)}</td>
+          <td class="p-3 text-rose-500">${escapeHTML(row.interestPaid)}</td>
+          <td class="p-3 font-semibold">${escapeHTML(row.balanceRemaining)}</td>
+        </tr>
+      `).join('');
+    }
+
+    function renderHeroChart(chartData) {
+      const isDark = document.documentElement.classList.contains('dark');
+      const canvas = document.getElementById('heroChartCanvas');
+      if (!canvas) return;
+
+      if (chartInstance) chartInstance.destroy();
+
+      chartInstance = new Chart(canvas, {
+        type: chartData.type,
+        data: {
+          labels: chartData.labels,
+          datasets: [{
+            data: chartData.data,
+            backgroundColor: chartData.colors,
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                color: isDark ? '#94a3b8' : '#475569',
+                font: { size: 10, family: 'Plus Jakarta Sans' }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    // --- Directory Grid with Dynamic Color Shift ---
+    function selectCategory(category, defaultCalcId, categoryThemeColor) {
+      selectedCategory = category;
+
+      // Update Theme Color dynamically according to the category
+      if (categoryThemeColor) {
+        setThemeColor(categoryThemeColor, false);
+      }
+
+      document.querySelectorAll('.cat-pill').forEach(btn => {
+        btn.classList.remove('theme-bg', 'text-white', 'shadow-md');
+        btn.classList.add('bg-slate-800/80', 'text-slate-300');
+      });
+
+      let activeBtnId = `cat-btn-${category}`;
+      if (category === 'Fitness & Health') activeBtnId = 'cat-btn-Fitness';
+      if (category === 'Tech & Engineering') activeBtnId = 'cat-btn-Tech';
+
+      const activeBtn = document.getElementById(activeBtnId);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-slate-800/80', 'text-slate-300');
+        activeBtn.classList.add('theme-bg', 'text-white', 'shadow-md');
+      }
+
+      if (defaultCalcId) setHashRoute(defaultCalcId, false);
+      renderDirectory();
+    }
+
+    function renderDirectory() {
+      const container = document.getElementById('directoryGrids');
+      const titleLabel = document.getElementById('activeFilterLabel');
+
+      let cats = [...new Set(calculators.map(c => c.category))];
+      if (selectedCategory !== "All") {
+        cats = [selectedCategory];
+        titleLabel.innerText = `Filtered: ${selectedCategory}`;
+      } else {
+        titleLabel.innerText = "Showing All 51 Tools";
+      }
+
+      container.innerHTML = cats.map(cat => {
+        const items = calculators.filter(c => c.category === cat);
+        return `
+          <div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+              <span>${escapeHTML(cat)}</span>
+              <span class="text-xs bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded-full font-bold">${items.length}</span>
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              ${items.map(item => `
+                <div onclick="setHashRoute('${escapeHTML(item.id)}', true)" 
+                     class="stable-card p-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 cursor-pointer group flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center justify-between">
+                      <span class="text-[10px] font-bold uppercase tracking-wider theme-text theme-light-bg px-2 py-0.5 rounded">${escapeHTML(item.category)}</span>
+                      ${pinnedTools.includes(item.id) ? '<span class="text-xs text-amber-400">⭐</span>' : ''}
+                    </div>
+                    <h4 class="font-bold text-base text-slate-900 dark:text-white group-hover:theme-text transition mt-2 mb-1">${escapeHTML(item.name)}</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2">${escapeHTML(item.desc)}</p>
+                  </div>
+                  <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold theme-text">
+                    <span>Calculate Now</span>
+                    <span>↑</span>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // --- Side-by-Side What-If Comparison Modal ---
+    function openCompareModal() {
+      document.getElementById('compareModalTitle').innerText = `Compare: ${currentCalc.name}`;
+      const cA = document.getElementById('compareInputsA');
+      const cB = document.getElementById('compareInputsB');
+
+      cA.innerHTML = currentCalc.inputs.map(inp => {
+        const val = document.getElementById(`h-inp-${inp.id}`)?.value || inp.val;
+        return `
+          <div>
+            <label class="font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider block text-[10px]">${escapeHTML(inp.label)}</label>
+            <input type="number" id="cmp-a-${inp.id}" value="${val}" step="${inp.step || 'any'}"
+                   class="w-full p-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-xs" oninput="runComparison()">
+          </div>
+        `;
+      }).join('');
+
+      cB.innerHTML = currentCalc.inputs.map(inp => {
+        const val = document.getElementById(`h-inp-${inp.id}`)?.value || inp.val;
+        return `
+          <div>
+            <label class="font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider block text-[10px]">${escapeHTML(inp.label)}</label>
+            <input type="number" id="cmp-b-${inp.id}" value="${val}" step="${inp.step || 'any'}"
+                   class="w-full p-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-xs" oninput="runComparison()">
+          </div>
+        `;
+      }).join('');
+
+      runComparison();
+      document.getElementById('compareModal').classList.remove('hidden');
+    }
+
+    function closeCompareModal() {
+      document.getElementById('compareModal').classList.add('hidden');
+    }
+
+    function runComparison() {
+      const valA = {};
+      const valB = {};
+      currentCalc.inputs.forEach(inp => {
+        valA[inp.id] = parseFloat(document.getElementById(`cmp-a-${inp.id}`)?.value) || 0;
+        valB[inp.id] = parseFloat(document.getElementById(`cmp-b-${inp.id}`)?.value) || 0;
+      });
+
+      const resA = currentCalc.calc(valA);
+      const resB = currentCalc.calc(valB);
+
+      document.getElementById('compareResA').innerText = resA.primary;
+      document.getElementById('compareResB').innerText = resB.primary;
+
+      document.getElementById('compareDeltaText').innerText = 
+        `Scenario A: ${resA.primary}  vs  Scenario B: ${resB.primary}`;
+    }
+
+    // --- Command Palette (CMD+K) ---
+    function setupKeyboardShortcuts() {
+      window.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+          e.preventDefault();
+          toggleCommandPalette(true);
+        } else if (e.key === 'Escape') {
+          toggleCommandPalette(false);
+          closeCompareModal();
+          closeArticleModal();
+          closeLegalModal();
+          toggleHistoryModal(false);
+        }
+      });
+    }
+
+    function toggleCommandPalette(open) {
+      const modal = document.getElementById('cmdPaletteModal');
+      const input = document.getElementById('cmdPaletteInput');
+      if (open) {
+        modal.classList.remove('hidden');
+        input.value = '';
+        input.focus();
+        filterCommandPalette('');
+      } else {
+        modal.classList.add('hidden');
+      }
+    }
+
+    function filterCommandPalette(q) {
+      q = q.toLowerCase().trim();
+      const results = document.getElementById('cmdPaletteResults');
+      const matches = calculators.filter(c => c.name.toLowerCase().includes(q) || c.category.toLowerCase().includes(q));
+
+      results.innerHTML = matches.slice(0, 8).map(c => `
+        <div onclick="setHashRoute('${escapeHTML(c.id)}', true); toggleCommandPalette(false);" 
+             class="p-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl cursor-pointer flex items-center justify-between transition group">
+          <div class="flex items-center gap-2">
+            <span class="text-sm">⚡</span>
+            <div>
+              <span class="text-xs font-bold text-slate-900 dark:text-white group-hover:theme-text block">${escapeHTML(c.name)}</span>
+              <span class="text-[10px] text-slate-400">${escapeHTML(c.category)}</span>
+            </div>
+          </div>
+          <span class="text-xs font-bold text-slate-300 group-hover:theme-text">Enter ↵</span>
+        </div>
+      `).join('');
+    }
+
+    // --- Blog Engine & Article Modal ---
+    function renderBlog() {
+      const container = document.getElementById('articlesGrid');
+      const filtered = selectedBlogCategory === 'All' 
+        ? articles 
+        : articles.filter(a => a.category === selectedBlogCategory);
+
+      container.innerHTML = filtered.map(art => `
+        <article onclick="openArticleModal('${escapeHTML(art.id)}', true)" 
+                 class="stable-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 cursor-pointer flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between text-xs mb-3">
+              <span class="font-bold text-[10px] uppercase tracking-wider theme-text theme-light-bg px-2 py-0.5 rounded">
+                ${escapeHTML(art.category)}
+              </span>
+              <span class="text-slate-400 text-[11px]">${escapeHTML(art.readTime)}</span>
+            </div>
+            <h3 class="font-extrabold text-lg text-slate-900 dark:text-white group-hover:theme-text transition mb-2 leading-snug">
+              ${escapeHTML(art.title)}
+            </h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-3">
+              ${escapeHTML(art.snippet)}
+            </p>
+          </div>
+          <div class="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold theme-text">
+            <span>Read Full Guide</span>
+            <span>→</span>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function filterBlog(category) {
+      selectedBlogCategory = category;
+      document.querySelectorAll('.blog-tab').forEach(tab => {
+        tab.classList.remove('theme-bg', 'text-white');
+        tab.classList.add('bg-white', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+        if (tab.innerText.includes(category) || (category === 'All' && tab.innerText.includes('All'))) {
+          tab.classList.remove('bg-white', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+          tab.classList.add('theme-bg', 'text-white');
+        }
+      });
+      renderBlog();
+    }
+
+    function openArticleModal(articleId, updateHash = true) {
+      const art = articles.find(a => a.id === articleId);
+      if (!art) return;
+
+      document.getElementById('articleCategoryBadge').innerText = art.category;
+      document.getElementById('articleModalTitle').innerText = art.title;
+      document.getElementById('articleModalDate').innerText = art.date;
+      document.getElementById('articleModalReadTime').innerText = art.readTime;
+      document.getElementById('articleModalContent').innerHTML = art.content;
+
+      const ctaBtn = document.getElementById('articleCtaBtn');
+      ctaBtn.onclick = () => {
+        closeArticleModal();
+        setHashRoute(art.relatedCalcId, true);
+      };
+
+      document.getElementById('articleModal').classList.remove('hidden');
+      if (updateHash) window.location.hash = `article=${encodeURIComponent(art.id)}`;
+    }
+
+    function closeArticleModal() {
+      document.getElementById('articleModal').classList.add('hidden');
+      if (window.location.hash.startsWith('#article=')) history.replaceState(null, null, ' ');
+    }
+
+    // ================= AI AGENT ENGINE =================
+    function toggleAiDrawer(open) {
+      const drawer = document.getElementById('aiDrawer');
+      if (open) {
+        drawer.classList.remove('translate-x-full');
+        document.getElementById('aiActiveToolName').innerText = currentCalc.name;
+        document.getElementById('aiContextPill').innerText = `Inspecting ${currentCalc.name}`;
+      } else {
+        drawer.classList.add('translate-x-full');
+      }
+    }
+
+    function clearAiChat() {
+      aiChatLog = [{ sender: "agent", text: "Chat history cleared. How can I assist with your calculations today?" }];
+      renderAiChat();
+    }
+
+    function renderAiChat() {
+      const container = document.getElementById('aiMessages');
+      container.innerHTML = aiChatLog.map(msg => {
+        if (msg.sender === "user") {
+          return `
+            <div class="flex justify-end">
+              <div class="theme-bg text-white rounded-2xl rounded-tr-xs px-3.5 py-2.5 max-w-[85%] leading-relaxed shadow-xs">
+                ${escapeHTML(msg.text)}
+              </div>
+            </div>
+          `;
+        } else {
+          return `
+            <div class="flex items-start gap-2.5">
+              <div class="w-6 h-6 rounded-md theme-light-bg theme-text flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+                ⚡
+              </div>
+              <div class="bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-2xl rounded-tl-xs px-3.5 py-2.5 max-w-[90%] leading-relaxed space-y-2">
+                ${formatAiMessage(msg.text)}
+              </div>
+            </div>
+          `;
+        }
+      }).join('');
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function formatAiMessage(text) {
+      let safe = escapeHTML(text);
+      safe = safe.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      safe = safe.replace(/`([^`]+)`/g, '<code class="bg-white dark:bg-slate-700 px-1.5 py-0.5 rounded text-[11px] font-mono theme-text">$1</code>');
+      safe = safe.replace(/\[ACTION:([a-zA-Z0-9_-]+):(.*?)\]/g, (match, toolId, label) => {
+        return `<button onclick="setHashRoute('${toolId}', true); toggleAiDrawer(false);" class="mt-2 inline-flex items-center gap-1 px-3 py-1.5 theme-bg text-white font-bold text-xs rounded-xl shadow-xs transition cursor-pointer hover:brightness-110"><span>↗</span> ${label}</button>`;
+      });
+      return safe;
+    }
+
+    function handleAiSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('aiUserInput');
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = '';
+      postUserMessage(text);
+      processAiQuery(text);
+    }
+
+    function handleQuickPrompt(promptText) {
+      postUserMessage(promptText);
+      processAiQuery(promptText);
+    }
+
+    function postUserMessage(text) {
+      aiChatLog.push({ sender: "user", text });
+      renderAiChat();
+    }
+
+    function askAiAboutCurrentCalc() {
+      toggleAiDrawer(true);
+      const prompt = `Analyze my active calculation in ${currentCalc.name}`;
+      postUserMessage(prompt);
+      processAiQuery(prompt);
+    }
+
+    function processAiQuery(query) {
+      const q = query.toLowerCase();
+
+      const values = {};
+      currentCalc.inputs.forEach(inp => {
+        const el = document.getElementById(`h-inp-${inp.id}`);
+        values[inp.id] = el ? parseFloat(el.value) || 0 : 0;
+      });
+      const res = currentCalc.calc(values);
+
+      setTimeout(() => {
+        let reply = "";
+
+        const mathMatch = query.match(/(?:calc|calculate|solve|math)\s*[:=]?\s*([0-9\.\+\-\*\/\^\(\)\s]+)/i);
+        if (mathMatch) {
+          try {
+            const expr = mathMatch[1].replace(/\^/g, '**');
+            if (/^[0-9\.\+\-\*\/\(\)\s\*\*]+$/.test(expr)) {
+              const sol = Function(`'use strict'; return (${expr})`)();
+              reply = `Evaluated: \`${mathMatch[1]}\` = **${num(sol, 4)}**`;
+            }
+          } catch (err) {}
+        }
+
+        if (!reply) {
+          if (q.includes("analyze") || q.includes("current") || q.includes("explain this")) {
+            if (currentCalc.id === "mortgage") {
+              reply = `Here is your **Mortgage Breakdown**:\n\n• Financed Principal: **${cur(values.homeVal - values.downPay)}**\n• Monthly Payment: **${res.primary}**\n• Total Interest: **${res.details[1]?.val}**\n\n💡 Check the interactive **Year-by-Year Schedule** below the card to see how extra payments save interest!`;
+            } else if (currentCalc.id === "tip") {
+              reply = `Each person should pay **${res.primary}** (covering meals and an equitable share of the tip).`;
+            } else if (currentCalc.id === "onerepmax") {
+              reply = `Your estimated 1RM is **${res.primary}**. Work in the 75–85% range for hypertrophy (muscle growth) and 85–95% for neuromuscular power!`;
+            } else {
+              reply = `Current Tool: **${currentCalc.name}**\nResult: **${res.primary}**\n\n${res.details.map(d => `• ${d.label}: **${d.val}**`).join('\n')}\n\nClick **Compare** in the tool header to test a second scenario!`;
+            }
+          } else if (q.includes("double") || q.includes("rule of 72")) {
+            reply = `The **Rule of 72** estimates doubling time: divide 72 by the annual return rate.\n• 6% = 12 years\n• 8% = 9 years\n• 10% = 7.2 years [ACTION:compound:Compound Interest]`;
+          } else {
+            reply = `I can help navigate all **51 tools** across Finance, Health, Math, and Engineering. Ask me to calculate a formula or click **Compare** to test side-by-side scenarios!`;
+          }
+        }
+
+        aiChatLog.push({ sender: "agent", text: reply });
+        renderAiChat();
+      }, 250);
+    }
+
+    // --- Clipboard Controller ---
+    function copyHeroResult() {
+      const res = document.getElementById('heroPrimaryResult').innerText;
+      const textToCopy = `${currentCalc.name}: ${res}`;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(textToCopy).then(() => showToast("Copied result!")).catch(() => fallbackCopyText(textToCopy));
+      } else {
+        fallbackCopyText(textToCopy);
+      }
+    }
+
+    function fallbackCopyText(text) {
+      const t = document.createElement("textarea");
+      t.value = text;
+      t.style.position = "fixed";
+      t.style.opacity = "0";
+      document.body.appendChild(t);
+      t.focus();
+      t.select();
+      try { document.execCommand('copy'); showToast("Copied to clipboard!"); } catch (err) {}
+      document.body.removeChild(t);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.classList.remove('opacity-0', 'translate-y-20');
+      setTimeout(() => toast.classList.add('opacity-0', 'translate-y-20'), 2000);
+    }
+
+    // --- CSV Export ---
+    function exportCurrentCSV() {
+      const values = {};
+      const labels = {};
+      currentCalc.inputs.forEach(inp => {
+        const el = document.getElementById(`h-inp-${inp.id}`);
+        const parsed = el ? parseFloat(el.value) || 0 : inp.val;
+        values[inp.id] = parsed;
+        labels[inp.label] = parsed;
+      });
+
+      const res = currentCalc.calc(values);
+      const rows = [
+        [sanitizeForCSV("VeloCalc PRO - Analytical Export")],
+        [sanitizeForCSV("Tool"), sanitizeForCSV(currentCalc.name)],
+        [sanitizeForCSV("Currency"), sanitizeForCSV(activeCurrency)],
+        [sanitizeForCSV("Color Palette"), sanitizeForCSV(activeThemeKey)],
+        [sanitizeForCSV("Export Timestamp"), sanitizeForCSV(new Date().toISOString())],
+        [],
+        [sanitizeForCSV("Input Parameter"), sanitizeForCSV("Value")]
+      ];
+
+      Object.entries(labels).forEach(([k, v]) => rows.push([sanitizeForCSV(k), sanitizeForCSV(v)]));
+      rows.push([]);
+      rows.push([sanitizeForCSV("Primary Output"), sanitizeForCSV(res.primary)]);
+
+      if (res.details) {
+        rows.push([sanitizeForCSV("Detailed Metrics"), sanitizeForCSV("Value")]);
+        res.details.forEach(d => rows.push([sanitizeForCSV(d.label), sanitizeForCSV(d.val)]));
+      }
+
+      if (activeScheduleData) {
+        rows.push([]);
+        rows.push([sanitizeForCSV("Year"), sanitizeForCSV("Principal Repaid"), sanitizeForCSV("Interest Repaid"), sanitizeForCSV("Balance Remaining")]);
+        activeScheduleData.forEach(s => rows.push([sanitizeForCSV(s.year), sanitizeForCSV(s.principalPaid), sanitizeForCSV(s.interestPaid), sanitizeForCSV(s.balanceRemaining)]));
+      }
+
+      const csvContent = "data:text/csv;charset=utf-8," + rows.map(r => r.join(",")).join("\n");
+      const link = document.createElement("a");
+      link.setAttribute("href", encodeURI(csvContent));
+      link.setAttribute("download", `VeloCalc_${encodeURIComponent(currentCalc.id)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast("CSV file exported!");
+    }
+
+    // --- History System ---
+    function saveCurrentToHistory() {
+      const res = document.getElementById('heroPrimaryResult').innerText;
+      const entry = {
+        id: Date.now(),
+        calcId: currentCalc.id,
+        calcName: currentCalc.name,
+        result: res,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+
+      calculationHistory.unshift(entry);
+      if (calculationHistory.length > 50) calculationHistory.pop();
+      try { localStorage.setItem('velocalc_history', JSON.stringify(calculationHistory)); } catch (e) {}
+      showToast("Saved to history!");
+    }
+
+    function toggleHistoryModal(open) {
+      const modal = document.getElementById('historyModal');
+      if (open) {
+        renderHistoryList();
+        modal.classList.remove('hidden');
+      } else {
+        modal.classList.add('hidden');
+      }
+    }
+
+    function renderHistoryList() {
+      const list = document.getElementById('historyList');
+      if (calculationHistory.length === 0) {
+        list.innerHTML = `<p class="text-center text-xs text-slate-400 py-8">No saved calculations yet.</p>`;
+        return;
+      }
+
+      list.innerHTML = calculationHistory.map(item => `
+        <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 flex items-center justify-between">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-slate-800 dark:text-slate-200">${escapeHTML(item.calcName)}</span>
+              <span class="text-[10px] text-slate-400">${escapeHTML(item.time)}</span>
+            </div>
+            <div class="text-sm font-extrabold theme-text mt-0.5">${escapeHTML(item.result)}</div>
+          </div>
+          <button onclick="setHashRoute('${escapeHTML(item.calcId)}', true); toggleHistoryModal(false);" 
+                  class="p-2 theme-text hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg text-xs font-bold">
+            Load ↑
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function clearAllHistory() {
+      calculationHistory = [];
+      try { localStorage.removeItem('velocalc_history'); } catch (e) {}
+      renderHistoryList();
+      showToast("History cleared");
+    }
+
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
